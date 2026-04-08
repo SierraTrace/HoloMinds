@@ -8,5 +8,4 @@ public static class SceneLoader
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
-
 }
