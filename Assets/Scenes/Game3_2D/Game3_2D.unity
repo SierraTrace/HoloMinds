@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb337c964e9f15409f168418826a271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameEnd
-  minigameIndex: 0
+  minigameIndex: 2
   testScore: 100
 --- !u!4 &1653524706
 Transform:
