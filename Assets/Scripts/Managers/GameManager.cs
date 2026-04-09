@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int totalScore;                      // Puntuación total acumulada por el jugador
-    public int[] levelScores = new int[5];      // Guardaremos las puntuaciones de cada nivel
+    public int[] gameScores = new int[5];      // Guardaremos las puntuaciones de cada nivel
 
     void Awake()
     {
@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int levelIndex, int score)
     {
-        if (levelIndex >= 0 && levelIndex < levelScores.Length)
+        if (levelIndex >= 0 && levelIndex < gameScores.Length)
         {
-            levelScores[levelIndex] = score;
+            gameScores[levelIndex] = score;
             RecalculateTotal();
         }
     }
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     void RecalculateTotal()
     {
         totalScore = 0;
-        foreach (int score in levelScores)
+        foreach (int score in gameScores)
         {
             totalScore += score;
         }
