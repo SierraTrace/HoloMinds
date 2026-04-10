@@ -37,4 +37,13 @@ public class GameManager : MonoBehaviour
             totalScore += score;
         }
     }
+
+    public void ResetScores()
+    {
+        totalScore = 0;
+        for (int i = 0; i < gameScores.Length; i++)
+        {
+            gameScores[i] = 0;
+        }
+    }
 }
