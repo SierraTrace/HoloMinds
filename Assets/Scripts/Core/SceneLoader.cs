@@ -21,9 +21,4 @@ public static class SceneLoader
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
-
-    public static void LoadMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
 }

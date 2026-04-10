@@ -12,6 +12,6 @@ public class FinalScoreUI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneLoader.LoadMainMenu();
+        SceneLoader.LoadSceneByName("MainMenu");
     }
 }
