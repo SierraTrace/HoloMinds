@@ -329,9 +329,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 440530193}
-        m_TargetAssemblyTypeName: MinigameEnd, Assembly-CSharp
-        m_MethodName: FinishMinigame
+      - m_Target: {fileID: 440530189}
+        m_TargetAssemblyTypeName: ControladorTiempoAR, Assembly-CSharp
+        m_MethodName: BotonPulsado
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -391,7 +391,6 @@ GameObject:
   - component: {fileID: 440530189}
   - component: {fileID: 440530191}
   - component: {fileID: 440530192}
-  - component: {fileID: 440530193}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -462,21 +461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1463159ada81dab4482996eb2cb1f768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteraccionAR
-  puntosLocales: 0
---- !u!114 &440530193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440530188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb337c964e9f15409f168418826a271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MinigameEnd
-  minigameIndex: 3
-  testScore: 100
 --- !u!1 &477069483
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +791,7 @@ GameObject:
   - component: {fileID: 575833015}
   - component: {fileID: 575833014}
   - component: {fileID: 575833013}
+  - component: {fileID: 575833016}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -864,6 +849,18 @@ Transform:
   - {fileID: 676039432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &575833016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575833012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4f20e47a219a54c9ca3a40792f5420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteraccionAR
 --- !u!1 &676039431
 GameObject:
   m_ObjectHideFlags: 0
