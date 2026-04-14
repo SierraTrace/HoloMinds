@@ -40,7 +40,14 @@ public class PlayerJump : MonoBehaviour
             this.enabled = false; // Desactivar el script para evitar más saltos
             rb.simulated = false; // Detener la física del jugador
 
-            if (endController != null) endController.FinishMinigame();
+            if (endController != null)
+            {
+                endController.FinishMinigame();
+            }
+            else
+            {
+                Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
+            }
         }
     }
 
