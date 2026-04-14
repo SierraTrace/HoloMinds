@@ -8,6 +8,8 @@ public class PlayerJump : MonoBehaviour
     private bool isGrounded = false;
     private InputAction jumpAction;
 
+    public MinigameEnd endController;      // Referencia al script que maneja el fin del minijuego
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,8 +35,12 @@ public class PlayerJump : MonoBehaviour
 
         if (collision.collider.CompareTag("Obstacle"))
         {
-            Debug.Log("Game Over!");    // TODO: Reemplazar con una pantalla de Game Over o reiniciar el juego
-            Time.timeScale = 0f;        // Pausamos el juego
+            Debug.Log("Game Over!");    // TODO: Reemplazar con una pantalla de Game Over
+
+            this.enabled = false; // Desactivar el script para evitar más saltos
+            rb.simulated = false; // Detener la física del jugador
+
+            if (endController != null) endController.FinishMinigame();
         }
     }
 
