@@ -8,6 +8,9 @@ public class MinigameEnd : MonoBehaviour
     public void FinishMinigame()
     {
         // TODO Aquí se debería pasar la puntuación real del minijuego en lugar de usar testScore
+        // Retirar el Debug.Log una vez que se integre con la puntuación real
+        Debug.Log($"Minigame {minigameIndex} finished with score: {testScore}");
+        
         GameManager.Instance.AddScore(minigameIndex, testScore);
         SceneLoader.LoadNextScene();
     }

@@ -704,6 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
   jumpForce: 12
+  endController: {fileID: 276855720}
 --- !u!1 &1134160391
 GameObject:
   m_ObjectHideFlags: 0
