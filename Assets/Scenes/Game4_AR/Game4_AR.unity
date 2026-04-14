@@ -442,13 +442,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerAR
   planeManager: {fileID: 575833013}
-  tiempoEntreSpawns: 2
+  tiempoEntreSpawns: 1
   objetosParaSuelo:
   - {fileID: 983076831239041940, guid: f76d727f1d3354e499c55c89fb58d4d4, type: 3}
   - {fileID: 5515313602932132839, guid: 7aea7041a0ab41d4b89e1931bbcce2ff, type: 3}
   objetosParaMesa:
-  - {fileID: 983076831239041940, guid: f76d727f1d3354e499c55c89fb58d4d4, type: 3}
-  - {fileID: 5515313602932132839, guid: 7aea7041a0ab41d4b89e1931bbcce2ff, type: 3}
+  - {fileID: 8895497116065824635, guid: b757ba8fd5044ca4bad91521397265b1, type: 3}
+  - {fileID: 7552147976146203600, guid: cf61880ea3a988f438f5ab02f1035bfc, type: 3}
+  - {fileID: 2212943598605533488, guid: 4c6055ec4e9e0fd44841bd3b59b50d16, type: 3}
+  - {fileID: 90971691084869778, guid: a7449d16234667f469a41868984e2f0f, type: 3}
+  - {fileID: 3083803213614768107, guid: 507582cdf2e2a9744bfc467436c40f84, type: 3}
+  - {fileID: 5665020750925226880, guid: a7a8eece446740e4e99cb9c5fbbe305f, type: 3}
   alturaLimiteSuelo: -10
 --- !u!114 &440530192
 MonoBehaviour:
