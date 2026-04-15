@@ -37,8 +37,9 @@ public class PlayerJump : MonoBehaviour
         {
             Debug.Log("Game Over!");    // TODO: Reemplazar con una pantalla de Game Over
 
-            this.enabled = false; // Desactivar el script para evitar más saltos
-            rb.simulated = false; // Detener la física del jugador
+            ScoreManager.Instance.StopScore();      // Detener conteo de puntuación.
+            this.enabled = false;                   // Desactivar el script para evitar más saltos
+            rb.simulated = false;                   // Detener la física del jugador
 
             if (endController != null)
             {

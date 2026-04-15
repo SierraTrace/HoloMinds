@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     public float gameSpeed = 5f;
 
     private float _currentDistance;
-    privated bool _isPaused = false;
+    private bool _isPaused = false;
 
     private void Awake()
     {
