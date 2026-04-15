@@ -442,17 +442,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerAR
   planeManager: {fileID: 575833013}
-  tiempoEntreSpawns: 1
+  tiempoEntreSpawns: 2
   objetosParaSuelo:
-  - {fileID: 983076831239041940, guid: f76d727f1d3354e499c55c89fb58d4d4, type: 3}
-  - {fileID: 5515313602932132839, guid: 7aea7041a0ab41d4b89e1931bbcce2ff, type: 3}
+  - {fileID: 3384354775694629149, guid: a09afaff8c8df2146964333211c45c5f, type: 3}
   objetosParaMesa:
-  - {fileID: 8895497116065824635, guid: b757ba8fd5044ca4bad91521397265b1, type: 3}
-  - {fileID: 7552147976146203600, guid: cf61880ea3a988f438f5ab02f1035bfc, type: 3}
-  - {fileID: 2212943598605533488, guid: 4c6055ec4e9e0fd44841bd3b59b50d16, type: 3}
-  - {fileID: 90971691084869778, guid: a7449d16234667f469a41868984e2f0f, type: 3}
-  - {fileID: 3083803213614768107, guid: 507582cdf2e2a9744bfc467436c40f84, type: 3}
-  - {fileID: 5665020750925226880, guid: a7a8eece446740e4e99cb9c5fbbe305f, type: 3}
+  - {fileID: 8131447905403912971, guid: 5bbaa8513affc4743b0103c4e2d7e247, type: 3}
+  - {fileID: 1068121227932261759, guid: a0c686a1301c21c44a3e93cb337a335b, type: 3}
+  - {fileID: 2783433823960364390, guid: a25e9a88ac41f2e468e1ce62a10307e9, type: 3}
+  - {fileID: 6562987414370602125, guid: 1f51aacd7cb35c84ab93d2973521fd93, type: 3}
+  - {fileID: 4202209763568427072, guid: 1d8b07e63a642b4469f9cf270f08999d, type: 3}
   alturaLimiteSuelo: -10
 --- !u!114 &440530192
 MonoBehaviour:
