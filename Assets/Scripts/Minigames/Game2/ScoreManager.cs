@@ -7,14 +7,19 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Configuration")]
     public TextMeshProUGUI scoreText;
-    public float gameSpeed = 5f;
 
+    public float gameSpeed = 5f;
     private float _currentDistance;
     private bool _isPaused = false;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    public float GetWorldSpeed()
+    {
+        return _isPaused ? 0f : gameSpeed;
     }
 
     void Update()
