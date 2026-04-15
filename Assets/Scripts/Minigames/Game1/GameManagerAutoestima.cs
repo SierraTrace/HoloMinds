@@ -26,7 +26,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
     [Header("Sonidos")]
     public AudioClip sonidoAcierto;
     public AudioClip sonidoFallo;
-    private AudioSource fuenteAudio;
+    [SerializeField] private AudioSource fuenteAudio;
 
     void Awake()
     {
@@ -34,12 +34,12 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         instance = this;
 
         // Buscamos el AudioSource en el objeto donde esté este script
-        fuenteAudio = GetComponent<AudioSource>();
+        //fuenteAudio = GetComponent<AudioSource>();
 
         if (fuenteAudio != null)
         {
             fuenteAudio.spatialBlend = 0;
-            fuenteAudio.volume = 1.0f;
+            //fuenteAudio.volume = 1.0f;
             fuenteAudio.playOnAwake = false;
         }
     }

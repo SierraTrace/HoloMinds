@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class MinigameEnd : MonoBehaviour
 {
-    public int minigameIndex;   // Índice del minijuego actual, asignado en el Inspector
-    public int testScore = 100; // TODO Puntuación de prueba para simular el resultado del minijuego
+    public int minigameIndex;   // ï¿½ndice del minijuego actual, asignado en el Inspector
+    public int testScore = 100; // TODO Puntuaciï¿½n de prueba para simular el resultado del minijuego
 
     public void FinishMinigame()
     {
-        // TODO Aquí se debería pasar la puntuación real del minijuego en lugar de usar testScore
-        // Retirar el Debug.Log una vez que se integre con la puntuación real
+        // TODO Aquï¿½ se deberï¿½a pasar la puntuaciï¿½n real del minijuego en lugar de usar testScore
+        // Retirar el Debug.Log una vez que se integre con la puntuaciï¿½n real
         Debug.Log($"Minigame {minigameIndex} finished with score: {testScore}");
-        
+
         GameManager.Instance.AddScore(minigameIndex, testScore);
         SceneLoader.LoadNextScene();
     }
