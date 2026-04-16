@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 93f67a6f66cca474e93ff96178320e16
-  - enabled: 1
-    path: Assets/Scenes/Game1_2D/Game1_2D.unity
+  - enabled: 0
+    path: Assets/Scenes/Game1_2D/Game1_2D______.unity
     guid: 788ba3383625f1447ba61960bcbf1d8a
   - enabled: 1
+    path: Assets/Scenes/Game1_2D/Game1_2D.unity
+    guid: fbfec56ff205d4b07881b28015847e7d
+  - enabled: 1
     path: Assets/Scenes/Game2_2D/Game2_2D.unity
-    guid: 3aad8fc3225bb144395d4c4adf685f7a
+    guid: 70a50e97b1d43714a986550ca703f773
   - enabled: 1
     path: Assets/Scenes/Game3_2D/Game3_2D.unity
     guid: 2046ba19d96a9c54cab6fd7656ec5967
