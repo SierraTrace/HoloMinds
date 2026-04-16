@@ -13,9 +13,22 @@ public class PlayerJump : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        jumpAction = new InputAction(binding: "<Keyboard>/space", type: InputActionType.Button);
-        jumpAction.performed += ctx => TryJump();
+        jumpAction = new InputAction(type: InputActionType.Button);
+
+        jumpAction.AddBinding("<Keyboard>/space");                  // Salto en PC o Mac
+        jumpAction.AddBinding("<Touchscreen>/primaryTouch/press");  // Salto en movil
+
+        jumpAction.performed += ctx => TryJump();        
+    }
+
+    private void OnEnable()
+    {
         jumpAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        jumpAction.Disable();
     }
 
     private void TryJump()
@@ -35,32 +48,34 @@ public class PlayerJump : MonoBehaviour
 
         if (collision.collider.CompareTag("Obstacle"))
         {
-            Debug.Log("Game Over!");    // TODO: Reemplazar con una pantalla de Game Over
+            HandleFinJuego();
+        }
+    }
 
-            if (ScoreManager.Instance != null)
-            {
-                ScoreManager.Instance.StopScore();
-                ScoreManager.Instance.StopScore();
-            }
+    private void HandleFinJuego()
+    {
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.StopScore();
+        }
 
-            ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
-            if (spawner != null)
-            {
-                spawner.StopAllCoroutines();        // Detener la generación de obstáculos
-            }
+        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
+        if (spawner != null)
+        {
+            spawner.StopAllCoroutines();        // Detener la generación de obstáculos
+        }
 
-            this.enabled = false;                   // Desactivar el script para evitar más saltos
-            rb.simulated = false;                   // Detener la física del jugador
+        jumpAction.Disable();                   // Desactivar el salto
 
-            int finalScore = ScoreManager.Instance.GetFinalScore();
-            if (endController != null)
-            {
-                endController.FinishMinigameWithScore(finalScore);
-            }
-            else
-            {
-                Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
-            }
+        int finalScore = ScoreManager.Instance != null ? ScoreManager.Instance.GetFinalScore() : 0;
+
+        if (endController != null)
+        {
+            endController.FinishMinigameWithScore(finalScore);
+        }
+        else
+        {
+            Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
         }
     }
 
@@ -74,7 +89,7 @@ public class PlayerJump : MonoBehaviour
 
     void OnDestroy()
     {
-        jumpAction.Disable();
+        // jumpAction.Disable();
         jumpAction.Dispose();
     }
 }
