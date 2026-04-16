@@ -1,9 +1,7 @@
 using UnityEngine;
 
-/// <summary>
-/// Comportamiento del "Ex" que se acerca al jugador.
-/// Según GDD: El jugador esquiva girando la cabeza a izquierda o derecha (yaw).
-/// </summary>
+// Comportamiento del "Ex" que se acerca al jugador
+// El jugador esquiva girando la cabeza a izquierda o derecha (yaw)
 public class Obstacle : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -14,7 +12,7 @@ public class Obstacle : MonoBehaviour
     public Transform target;
 
     [Header("Detección de Esquive (GDD)")]
-    [Tooltip("Distancia a la que se evalúa si el jugador esquivó")]
+    [Tooltip("Distancia a la que se evalúa si el jugador esquiva")]
     public float evaluationDistance = 2.5f;
     
     [Tooltip("Distancia mínima antes de desaparecer")]
@@ -28,7 +26,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private bool isActive = true;
 
     // Evento para comunicar con el GameManager
-    public System.Action<bool> OnObstacleResult; // true = esquivado, false = abrazo
+    public System.Action<bool> OnObstacleResult;
 
     private VRCameraController cameraController;
     private Vector3 initialApproachDirection;
@@ -41,7 +39,6 @@ public class Obstacle : MonoBehaviour
         }
         cameraController = FindFirstObjectByType<VRCameraController>();
         
-        // Guardar dirección inicial de aproximación
         if (target != null)
         {
             initialApproachDirection = (target.position - transform.position).normalized;
@@ -55,40 +52,35 @@ public class Obstacle : MonoBehaviour
         CheckEvaluation();
     }
 
+    // Mueve el obstáculo hacia el jugador
     void MoveTowardsTarget()
     {
         if (target == null) return;
 
-        // Moverse directamente hacia el target
         Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
-        
-        // Mirar al jugador
         transform.LookAt(target);
     }
 
+    // Comprueba si el obstáculo llega a la zona de evaluación
     void CheckEvaluation()
     {
         if (target == null || hasBeenEvaluated) return;
 
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        // ¿Llegó a la zona de evaluación?
         if (distanceToTarget <= evaluationDistance)
         {
             EvaluateDodge();
         }
 
-        // ¿Llegó demasiado cerca? Desactivar
         if (distanceToTarget <= despawnDistance)
         {
             Deactivate();
         }
     }
 
-    /// <summary>
-    /// Evalúa si el jugador esquivó girando la cabeza a los lados (GDD)
-    /// </summary>
+    // Evalúa si el jugador esquiva girando la cabeza a los lados
     void EvaluateDodge()
     {
         if (hasBeenEvaluated) return;
@@ -100,40 +92,37 @@ public class Obstacle : MonoBehaviour
 
         if (isDodged)
         {
-            Debug.Log("Obstacle: ¡Esquivaste al Ex! (+autoestima)");
+            Debug.Log("Obstacle: ¡Esquivas al Ex! (+autoestima)");
             ShowDodgeEffect();
         }
         else
         {
-            Debug.Log("Obstacle: ¡Tu Ex te abrazó! (-autoestima)");
+            Debug.Log("Obstacle: ¡Tu Ex te abraza! (-autoestima)");
             ShowHitEffect();
         }
     }
 
-    /// <summary>
-    /// Comprueba si el jugador está mirando hacia un lado (esquiva por giro horizontal/yaw)
-    /// Según GDD: El jugador debe girar la cabeza a izquierda o derecha para esquivar
-    /// </summary>
+    // Comprueba si el jugador mira hacia otro lado (esquiva por giro horizontal/yaw)
     bool IsPlayerLookingAway()
     {
         Transform cameraTransform = cameraController != null ? cameraController.transform : Camera.main?.transform;
         
         if (cameraTransform == null) return false;
 
-        // Obtener la dirección hacia donde mira la cámara (solo componente horizontal)
+        // Obtiene la dirección hacia donde mira la cámara (solo horizontal)
         Vector3 cameraForward = cameraTransform.forward;
-        cameraForward.y = 0; // Ignorar componente vertical
+        cameraForward.y = 0;
         cameraForward.Normalize();
 
-        // Obtener la dirección desde la cámara hacia el obstáculo (solo horizontal)
+        // Obtiene la dirección desde la cámara hacia el obstáculo (solo horizontal)
         Vector3 toObstacle = (transform.position - cameraTransform.position);
-        toObstacle.y = 0; // Ignorar componente vertical
+        toObstacle.y = 0;
         toObstacle.Normalize();
 
-        // Calcular el ángulo horizontal entre donde mira el jugador y donde está el Ex
+        // Calcula el ángulo horizontal entre donde mira el jugador y donde está el Ex
         float horizontalAngle = Vector3.Angle(cameraForward, toObstacle);
 
-        // Si el ángulo es mayor que el umbral, el jugador está mirando hacia otro lado = ESQUIVA
+        // Si el ángulo es mayor que el umbral, el jugador mira hacia otro lado = ESQUIVA
         bool isDodging = horizontalAngle > dodgeAngleThreshold;
         
         Debug.Log($"Obstacle: Ángulo horizontal: {horizontalAngle:F1}° (umbral: {dodgeAngleThreshold}°) -> {(isDodging ? "ESQUIVA" : "ABRAZO")}");
@@ -141,34 +130,34 @@ public class Obstacle : MonoBehaviour
         return isDodging;
     }
 
+    // Efecto visual de esquive - color verde
     void ShowDodgeEffect()
     {
-        // Efecto visual de esquive - color verde
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
         {
             rend.material.color = Color.green;
         }
-        // TODO: Añadir partículas, sonido positivo
     }
 
+    // Efecto visual de abrazo/impacto - color rojo
     void ShowHitEffect()
     {
-        // Efecto visual de abrazo/impacto - color rojo
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
         {
             rend.material.color = Color.red;
         }
-        // TODO: Añadir efecto de abrazo, sonido negativo, shake de cámara
     }
 
+    // Desactiva el obstáculo (para object pooling)
     public void Deactivate()
     {
         isActive = false;
         gameObject.SetActive(false);
     }
 
+    // Resetea el obstáculo para reutilizarlo
     public void ResetObstacle(Vector3 spawnPosition, float newSpeed)
     {
         transform.position = spawnPosition;
@@ -176,14 +165,12 @@ public class Obstacle : MonoBehaviour
         hasBeenEvaluated = false;
         isActive = true;
         
-        // Resetear color
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
         {
             rend.material.color = Color.white;
         }
         
-        // Recalcular dirección de aproximación
         if (target != null)
         {
             initialApproachDirection = (target.position - transform.position).normalized;

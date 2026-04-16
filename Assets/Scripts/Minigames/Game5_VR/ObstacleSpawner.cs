@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-/// <summary>
-/// Gestiona el spawn de obstáculos desde diferentes posiciones.
-/// Configurable para ajustar dificultad, frecuencia y patrones.
-/// </summary>
+// Gestiona el spawn de obstáculos (Ex) frente al jugador
+// Configurable para ajustar dificultad, frecuencia y patrones
 public class ObstacleSpawner : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -12,10 +10,10 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject obstaclePrefab;
 
     [Header("Spawn Points")]
-    [Tooltip("Puntos desde donde pueden aparecer los obstáculos")]
+    [Tooltip("Puntos desde donde aparecen los obstáculos")]
     public Transform[] spawnPoints;
     
-    [Tooltip("Si no hay spawn points, usar esta distancia alrededor del jugador")]
+    [Tooltip("Si no hay spawn points, usa esta distancia")]
     public float spawnRadius = 20f;
     
     [Tooltip("Altura de spawn si se genera automáticamente")]
@@ -28,7 +26,7 @@ public class ObstacleSpawner : MonoBehaviour
     [Tooltip("Variación aleatoria del intervalo")]
     public float intervalVariance = 0.5f;
     
-    [Tooltip("Reducir intervalo con el tiempo (más difícil)")]
+    [Tooltip("Reduce el intervalo con el tiempo (más difícil)")]
     public float difficultyRamp = 0.02f;
 
     [Header("Dificultad")]
@@ -55,7 +53,7 @@ public class ObstacleSpawner : MonoBehaviour
     private Transform playerTransform;
 
     // Evento para notificar cuando un obstáculo da resultado
-    public System.Action<bool> OnObstacleResult; // true = esquivado, false = golpeado
+    public System.Action<bool> OnObstacleResult;
 
     void Start()
     {
@@ -73,9 +71,7 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Inicializa el pool de obstáculos
-    /// </summary>
+    // Inicializa el pool de obstáculos
     void InitializePool()
     {
         if (obstaclePrefab == null)
@@ -101,9 +97,7 @@ public class ObstacleSpawner : MonoBehaviour
         Debug.Log($"ObstacleSpawner: Pool inicializado con {poolSize} obstáculos");
     }
 
-    /// <summary>
-    /// Obtiene un obstáculo del pool o crea uno nuevo si es necesario
-    /// </summary>
+    // Obtiene un obstáculo del pool o crea uno nuevo si es necesario
     Obstacle GetFromPool()
     {
         foreach (Obstacle obs in obstaclePool)
@@ -114,7 +108,6 @@ public class ObstacleSpawner : MonoBehaviour
             }
         }
 
-        // Si no hay disponibles, crear uno nuevo
         if (obstaclePrefab != null)
         {
             GameObject obj = Instantiate(obstaclePrefab, Vector3.zero, Quaternion.identity, transform);
@@ -131,9 +124,7 @@ public class ObstacleSpawner : MonoBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Spawnea un obstáculo en una posición aleatoria
-    /// </summary>
+    // Spawnea un obstáculo en una posición
     void SpawnObstacle()
     {
         Vector3 spawnPosition = GetRandomSpawnPosition();
@@ -143,33 +134,25 @@ public class ObstacleSpawner : MonoBehaviour
         {
             obstacle.ResetObstacle(spawnPosition, currentSpeed);
             obstaclesSpawned++;
-
-            // Incrementar dificultad
             currentSpeed = Mathf.Min(currentSpeed + speedIncrement, maxSpeed);
         }
     }
 
-    /// <summary>
-    /// Obtiene una posición para spawnear FRENTE al jugador (según GDD)
-    /// El Ex siempre aparece de frente y avanza hacia el jugador
-    /// </summary>
+    // Obtiene una posición para spawnear FRENTE al jugador
+    // El Ex siempre aparece de frente y avanza hacia el jugador
     Vector3 GetRandomSpawnPosition()
     {
-        // Si hay spawn points definidos, usar uno aleatorio
         if (spawnPoints != null && spawnPoints.Length > 0)
         {
             int randomIndex = Random.Range(0, spawnPoints.Length);
             return spawnPoints[randomIndex].position;
         }
 
-        // GDD: El Ex aparece FRENTE al jugador
         if (playerTransform != null)
         {
-            // Generar posición frente al jugador con variación lateral pequeña
-            // Ángulo frontal: entre -30° y +30° respecto al frente
+            // Genera posición frente al jugador con variación lateral pequeña
             float angleVariation = Random.Range(-30f, 30f) * Mathf.Deg2Rad;
             
-            // Dirección base: hacia adelante del jugador (eje Z positivo en mundo)
             float x = Mathf.Sin(angleVariation) * spawnRadius;
             float z = Mathf.Cos(angleVariation) * spawnRadius;
             
@@ -180,13 +163,10 @@ public class ObstacleSpawner : MonoBehaviour
             );
         }
 
-        // Fallback: posición por defecto frente
         return new Vector3(0, spawnHeight, spawnRadius);
     }
 
-    /// <summary>
-    /// Programa el siguiente spawn
-    /// </summary>
+    // Programa el siguiente spawn
     void ScheduleNextSpawn()
     {
         float variance = Random.Range(-intervalVariance, intervalVariance);
@@ -194,52 +174,41 @@ public class ObstacleSpawner : MonoBehaviour
         nextSpawnTime = Time.time + currentInterval + variance;
     }
 
-    /// <summary>
-    /// Maneja el resultado de un obstáculo (esquivado o golpeado)
-    /// </summary>
+    // Maneja el resultado de un obstáculo
     void HandleObstacleResult(bool wasDodged)
     {
         OnObstacleResult?.Invoke(wasDodged);
     }
 
-    /// <summary>
-    /// Inicia el spawning de obstáculos
-    /// </summary>
+    // Inicia el spawning de obstáculos
     public void StartSpawning()
     {
         isSpawning = true;
-        nextSpawnTime = Time.time + 1f; // Pequeño delay inicial
-        Debug.Log("ObstacleSpawner: Iniciando spawning");
+        nextSpawnTime = Time.time + 1f;
+        Debug.Log("ObstacleSpawner: Inicia el spawning");
     }
 
-    /// <summary>
-    /// Detiene el spawning
-    /// </summary>
+    // Detiene el spawning
     public void StopSpawning()
     {
         isSpawning = false;
-        Debug.Log("ObstacleSpawner: Spawning detenido");
+        Debug.Log("ObstacleSpawner: Detiene el spawning");
     }
 
-    /// <summary>
-    /// Resetea el spawner para una nueva partida
-    /// </summary>
+    // Resetea el spawner para una nueva partida
     public void ResetSpawner()
     {
         StopSpawning();
         obstaclesSpawned = 0;
         currentSpeed = baseSpeed;
 
-        // Desactivar todos los obstáculos
         foreach (Obstacle obs in obstaclePool)
         {
             obs.Deactivate();
         }
     }
 
-    /// <summary>
-    /// Desactiva todos los obstáculos activos
-    /// </summary>
+    // Desactiva todos los obstáculos activos
     public void ClearAllObstacles()
     {
         foreach (Obstacle obs in obstaclePool)
