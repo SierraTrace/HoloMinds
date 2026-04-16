@@ -8,7 +8,6 @@ public class SpawnerAR : MonoBehaviour
     public float tiempoEntreSpawns = 2f; 
 
     [Header("Clasificación de Objetos")]
-    // Ahora tenemos DOS listas separadas
     public GameObject[] objetosParaSuelo; // Zapatos, basura, cajas...
     public GameObject[] objetosParaMesa;  // Marcos de fotos, tazas, mandos...
 
@@ -34,7 +33,7 @@ public class SpawnerAR : MonoBehaviour
         var planos = planeManager.trackables;
         if (planos.count == 0) return; 
 
-        // Elegimos un plano al azar como hacíamos antes
+        // 1. Elegimos un plano al azar
         int indiceAleatorio = Random.Range(0, planos.count);
         int i = 0;
         ARPlane planoElegido = null;
@@ -51,36 +50,45 @@ public class SpawnerAR : MonoBehaviour
 
         if (planoElegido != null)
         {
-            // Calculamos la posición dentro del plano
+            // 2. Calculamos la posición dentro del plano
             Vector3 centroPlano = planoElegido.transform.position;
             float xAleatorio = Random.Range(-planoElegido.extents.x, planoElegido.extents.x);
             float zAleatorio = Random.Range(-planoElegido.extents.y, planoElegido.extents.y); 
             Vector3 posicionSpawn = centroPlano + (planoElegido.transform.rotation * new Vector3(xAleatorio, 0, zAleatorio));
 
-            
-            // Comprobamos la altura (Eje Y) del plano elegido
+            // 3. Comprobamos la altura y ELEGIMOS EL PREFAB PRIMERO
             GameObject prefabElegido = null;
-
-            // En AR, la cámara suele empezar en Y = 0. 
-            // El suelo real suele estar a -1.5 metros aprox. Una mesa a -0.5 metros.
             if (centroPlano.y > alturaLimiteSuelo)
             {
-                // El plano está alto, asumimos que es una MESA o SOFÁ
                 if (objetosParaMesa.Length > 0) {
                     prefabElegido = objetosParaMesa[Random.Range(0, objetosParaMesa.Length)];
                 }
             }
             else
             {
-               
                 if (objetosParaSuelo.Length > 0) {
                     prefabElegido = objetosParaSuelo[Random.Range(0, objetosParaSuelo.Length)];
                 }
             }
 
-            // Si hemos encontrado un objeto válido, lo hacemos aparecer
-            if (prefabElegido != null) {
-                Instantiate(prefabElegido, posicionSpawn, Quaternion.identity);
+            // 4. Si hemos elegido un objeto, comprobamos si cabe y lo creamos
+            if (prefabElegido != null) 
+            {
+                float radioSeguridad = 0.7f; // <-- Sube esto a 0.5f si tus objetos siguen tocándose
+                
+                // Comprobamos si el radar está libre
+                if (!Physics.CheckSphere(posicionSpawn, radioSeguridad))
+                {
+                    // Creamos una rotación que siempre mire hacia arriba, pero girada al azar en Y
+                    Quaternion rotacionBuena = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+
+                    
+                    Instantiate(prefabElegido, posicionSpawn, rotacionBuena);
+                }
+                else
+                {
+                    Debug.Log("Posición ocupada. Abortando misión."); 
+                }
             }
         }
     }

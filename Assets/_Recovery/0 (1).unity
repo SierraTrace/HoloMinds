@@ -449,7 +449,7 @@ MonoBehaviour:
   - {fileID: 8131447905403912971, guid: 5bbaa8513affc4743b0103c4e2d7e247, type: 3}
   - {fileID: 1068121227932261759, guid: a0c686a1301c21c44a3e93cb337a335b, type: 3}
   - {fileID: 2783433823960364390, guid: a25e9a88ac41f2e468e1ce62a10307e9, type: 3}
-  - {fileID: 3295056109005980824, guid: 1f51aacd7cb35c84ab93d2973521fd93, type: 3}
+  - {fileID: 6562987414370602125, guid: 1f51aacd7cb35c84ab93d2973521fd93, type: 3}
   - {fileID: 4202209763568427072, guid: 1d8b07e63a642b4469f9cf270f08999d, type: 3}
   alturaLimiteSuelo: -10
 --- !u!114 &440530192
@@ -465,8 +465,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteraccionAR
   puntosLocales: 0
-  prefabParticulasBuenas: {fileID: 6061834496983389728, guid: 8f6965cf27ca8eb45b431e356bcbe012, type: 3}
-  prefabParticulasMalas: {fileID: 4349628476399660260, guid: e9c97fd55b81d1e439ae69e90b8108e8, type: 3}
 --- !u!114 &440530193
 MonoBehaviour:
   m_ObjectHideFlags: 0

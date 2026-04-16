@@ -7,16 +7,11 @@ public class ControladorTiempoAR : MonoBehaviour
     public TextMeshProUGUI textoTemporizador; 
     public GameObject botonFinal;            
     
-    private InteraccionAR scriptInteraccion;
-    private MinigameEnd scriptFinalCompas;
     private bool juegoTerminado = false;
 
     void Start()
     {
         if (botonFinal != null) botonFinal.SetActive(false);
-        
-        scriptInteraccion = FindFirstObjectByType<InteraccionAR>();
-        scriptFinalCompas = FindFirstObjectByType<MinigameEnd>();
     }
 
     void Update()
@@ -44,25 +39,20 @@ public class ControladorTiempoAR : MonoBehaviour
     {
         juegoTerminado = true;
         tiempoRestante = 0;
-        ActualizarReloj(0);
 
+        // 1. Mostramos el botón (que ya tiene el OnClick de Dani)
         if (botonFinal != null) botonFinal.SetActive(true);
         textoTemporizador.gameObject.SetActive(false);
 
-        // PASAMOS LOS PUNTOS AL SCRIPT DE DANI
+        // 2. Buscamos los scripts necesarios
+        InteraccionAR scriptInteraccion = FindFirstObjectByType<InteraccionAR>();
+        MinigameEnd scriptFinalCompas = FindFirstObjectByType<MinigameEnd>();
+
+        // 3. PASAMOS LOS PUNTOS AL SCRIPT DE DANI
         if (scriptInteraccion != null && scriptFinalCompas != null)
         {
             scriptFinalCompas.testScore = scriptInteraccion.puntosLocales;
-            Debug.Log("Puntos enviados al script final: " + scriptFinalCompas.testScore);
-        }
-    }
-
-    // Este método lo llamarás desde el evento OnClick del botón
-    public void BotonPulsado()
-    {
-        if (scriptFinalCompas != null)
-        {
-            scriptFinalCompas.FinishMinigame(); // Usa el método de Dani
+            Debug.Log("Puntos de AR inyectados en MinigameEnd: " + scriptFinalCompas.testScore);
         }
     }
 }
