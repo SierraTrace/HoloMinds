@@ -30,5 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalScore/FinalScore.unity
     guid: e7acacd5ffde2634ab29a6442b45af67
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 63afca559989cb646b38d59a51ce05ba, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 768d9b0de95e01c4883940d523864a58, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c5f1642b0b6417148bef8fee859cb3c8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4e317cf0e12e6614b89824048a35ce49, type: 2}
   m_UseUCBPForAssetBundles: 0
