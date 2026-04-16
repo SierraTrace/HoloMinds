@@ -37,12 +37,25 @@ public class PlayerJump : MonoBehaviour
         {
             Debug.Log("Game Over!");    // TODO: Reemplazar con una pantalla de Game Over
 
-            this.enabled = false; // Desactivar el script para evitar más saltos
-            rb.simulated = false; // Detener la física del jugador
+            if (ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.StopScore();
+                ScoreManager.Instance.StopScore();
+            }
 
+            ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
+            if (spawner != null)
+            {
+                spawner.StopAllCoroutines();        // Detener la generación de obstáculos
+            }
+
+            this.enabled = false;                   // Desactivar el script para evitar más saltos
+            rb.simulated = false;                   // Detener la física del jugador
+
+            int finalScore = ScoreManager.Instance.GetFinalScore();
             if (endController != null)
             {
-                endController.FinishMinigame();
+                endController.FinishMinigameWithScore(finalScore);
             }
             else
             {
