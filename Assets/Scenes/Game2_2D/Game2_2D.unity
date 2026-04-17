@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollegeStudent
       objectReference: {fileID: 0}
+    - target: {fileID: 8095947265537644599, guid: 82139f5fb84f14f498a9746d48c45adc, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8640346475962747016, guid: 82139f5fb84f14f498a9746d48c45adc, type: 3}
       propertyPath: m_GravityScale
       value: 5
