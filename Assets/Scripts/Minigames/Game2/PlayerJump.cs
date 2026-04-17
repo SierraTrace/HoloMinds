@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -64,12 +65,19 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleFinJuego()
     {
+        StartCoroutine(SequencceDie());
+    }
+
+    private IEnumerator SequencceDie()
+    {
         animator.SetBool("isRun", false);
         animator.SetBool("isJump", false);
-
         animator.SetTrigger("die");             // Activar la animación de muerte
 
         // animator.Play("Die", -1, 0f);
+
+        jumpAction.Disable();                   // Desactivar el salto
+        this.enabled = false;                   // Desactivar este script para evitar más interacciones
 
 
         if (ScoreManager.Instance != null)
@@ -79,10 +87,12 @@ public class PlayerJump : MonoBehaviour
         if (spawner != null)
             spawner.StopAllCoroutines();        // Detener la generación de obstáculos
 
-        jumpAction.Disable();                   // Desactivar el salto
+        
+
+        // Delay
+        yield return new WaitForSeconds(1f);
 
         int finalScore = ScoreManager.Instance != null ? ScoreManager.Instance.GetFinalScore() : 0;
-
         if (endController != null)
         {
             endController.FinishMinigameWithScore(finalScore);
@@ -90,13 +100,10 @@ public class PlayerJump : MonoBehaviour
         else
         {
             Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
-        }
+        }        
 
-        this.enabled = false;                   // Desactivar este script para evitar más interacciones
-
-        rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
-        rb.simulated = false;                    // Detener la física del jugador
-
+        // rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
+        // rb.simulated = false;                    // Detener la física del jugador
 
     }
 
