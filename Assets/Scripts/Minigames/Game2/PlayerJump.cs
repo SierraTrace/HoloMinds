@@ -87,11 +87,11 @@ public class PlayerJump : MonoBehaviour
         if (spawner != null)
             spawner.StopAllCoroutines();        // Detener la generación de obstáculos
 
-        // TODO: Implementacion Parallax
-        //ParallaxController parallax = FindObjectOfType<ParallaxController>();
-        //if ((parallax != null){
-        //    parallax.globalSpeed = 0;
-        //}
+        
+        ParallaxController parallax = FindObjectOfType<ParallaxController>();
+        if (parallax != null){
+            parallax.globalSpeed = 0;
+        }
 
         // Delay
         yield return new WaitForSeconds(1f);
