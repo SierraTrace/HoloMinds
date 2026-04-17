@@ -64,22 +64,20 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleFinJuego()
     {
-        //Animación de muerte
-        animator.SetTrigger("Die");
         animator.SetBool("isRun", false);
         animator.SetBool("isJump", false);
-        
+
+        animator.SetTrigger("die");             // Activar la animación de muerte
+
+        // animator.Play("Die", -1, 0f);
+
 
         if (ScoreManager.Instance != null)
-        {
             ScoreManager.Instance.StopScore();
-        }
 
         ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
         if (spawner != null)
-        {
             spawner.StopAllCoroutines();        // Detener la generación de obstáculos
-        }
 
         jumpAction.Disable();                   // Desactivar el salto
 
@@ -95,6 +93,8 @@ public class PlayerJump : MonoBehaviour
         }
 
         this.enabled = false;                   // Desactivar este script para evitar más interacciones
+
+        rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
         rb.simulated = false;                    // Detener la física del jugador
 
 
