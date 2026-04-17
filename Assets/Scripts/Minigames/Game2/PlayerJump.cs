@@ -88,6 +88,10 @@ public class PlayerJump : MonoBehaviour
             spawner.StopAllCoroutines();        // Detener la generación de obstáculos
 
         
+        ParallaxController parallax = FindObjectOfType<ParallaxController>();
+        if (parallax != null){
+            parallax.globalSpeed = 0;
+        }
 
         // Delay
         yield return new WaitForSeconds(1f);
@@ -105,6 +109,7 @@ public class PlayerJump : MonoBehaviour
         // rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
         // rb.simulated = false;                    // Detener la física del jugador
 
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
