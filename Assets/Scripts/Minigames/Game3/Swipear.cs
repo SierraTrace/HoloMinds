@@ -3,19 +3,20 @@ using UnityEngine.EventSystems;
 
 public class Swipear : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    public float velocidadCaida = 300f;
+    // AUMENTADO: Ahora los mensajes caen un poco más rápido
+    public float velocidadCaida = 450f; 
     private bool estaArrastrado = false;
     public GeneradorMensajes generadorPrincipal;
 
     void Update()
     {
-        // Si el jugador no lo está tocando, el mensaje cae
+       
         if (!estaArrastrado)
         {
             transform.Translate(Vector3.down * velocidadCaida * Time.deltaTime);
         }
 
-        // Si el mensaje se sale por abajo de la pantalla
+        
         if (transform.localPosition.y < -600f) 
         {
             // Si era un mensaje rojo y no se swipeó, cuenta como error
@@ -37,9 +38,15 @@ public class Swipear : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         estaArrastrado = false;
         
-        // Si lo lanzamos lejos a la izquierda o derecha, se destruye (lo salvamos)
+        
         if (Mathf.Abs(transform.localPosition.x) > 300f)
         {
+            
+            if (gameObject.CompareTag("MensajeRojo") && generadorPrincipal != null)
+            {
+                generadorPrincipal.SumarPunto();
+            }
+
             Destroy(gameObject);
         }
     }
