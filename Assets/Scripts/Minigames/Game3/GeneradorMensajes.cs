@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement; // Necesario si quieres forzar salto de escena
 
 public class GeneradorMensajes : MonoBehaviour
 {
@@ -7,9 +8,18 @@ public class GeneradorMensajes : MonoBehaviour
     public GameObject prefabFamilia;
     public Transform puntoDeSpawn;
     public float tiempoEntreMensajes = 2f;
+    
+    [Header("Sistema de Puntuación")]
+    public int puntuacionActual = 0;
+    public int limitePuntosVictoria = 10; // Puntos para ganar
     public int mensajesRojosEscapados = 0;
-    public int limiteErrores = 5;
+    public int limiteErrores = 3;         // Máximo de fallos permitidos
+    
+    [Header("Conexión con GameManager")]
+    public int indiceDelMinijuego = 2;    // Índice 2 corresponde al Minijuego 3 en el array
     public GameObject objetoBotonFinalizar;
+
+    private bool juegoTerminado = false;
 
     void Start()
     {
@@ -19,20 +29,20 @@ public class GeneradorMensajes : MonoBehaviour
 
     IEnumerator SpamMensajes()
     {
-        while (true)
+        while (!juegoTerminado)
         {
             yield return new WaitForSeconds(tiempoEntreMensajes);
             
-            // Elegimos aleatoriamente entre los dos
+            
             GameObject prefabAElegir = (Random.value > 0.5f) ? prefabEx : prefabFamilia;
             
-            // Lo creamos y lo metemos en el Canvas automáticamente
+            
             GameObject nuevoMensaje = Instantiate(prefabAElegir, GameObject.Find("Canvas").transform);
             
-            // Lo posicionamos donde esté tu PuntoSpawn
+          
             nuevoMensaje.GetComponent<RectTransform>().anchoredPosition = puntoDeSpawn.GetComponent<RectTransform>().anchoredPosition;
             
-            // Si es del Ex, le ponemos el Tag para detectarlo al caer
+           
             if (prefabAElegir == prefabEx)
             {
                 nuevoMensaje.tag = "MensajeRojo";
@@ -47,23 +57,59 @@ public class GeneradorMensajes : MonoBehaviour
         }
     }
 
-    public void RegistrarError()
+    // NUEVO: Método para sumar puntos al acertar
+    public void SumarPunto()
     {
-        mensajesRojosEscapados++;
-        Debug.Log("Errores: " + mensajesRojosEscapados);
+        if (juegoTerminado) return;
 
-        if(mensajesRojosEscapados >= limiteErrores)
+        puntuacionActual++;
+        Debug.Log("Puntos: " + puntuacionActual);
+
+        // Comprobamos la victoria
+        if (puntuacionActual >= limitePuntosVictoria)
         {
-            FinalizarJuego();
+            FinalizarJuego(true);
         }
     }
 
-    public void FinalizarJuego()
+    public void RegistrarError()
     {
-        StopAllCoroutines();
+        if (juegoTerminado) return;
+
+        mensajesRojosEscapados++;
+        Debug.Log("Errores: " + mensajesRojosEscapados);
+
+        // Comprobamos la derrota
+        if(mensajesRojosEscapados >= limiteErrores)
+        {
+            FinalizarJuego(false);
+        }
+    }
+
+    public void FinalizarJuego(bool esVictoria)
+    {
+        juegoTerminado = true;
+        StopAllCoroutines(); 
+
+       
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddScore(indiceDelMinijuego, puntuacionActual);
+            Debug.Log($"Guardando {puntuacionActual} puntos en el nivel {indiceDelMinijuego} del GameManager.");
+        }
+        else
+        {
+            Debug.LogWarning("No se ha encontrado el GameManager.Instance en la escena.");
+        }
+
+        // Acciones visuales del fin de juego
         if (objetoBotonFinalizar != null)
         {
             objetoBotonFinalizar.SetActive(true);
         }
+
+       
+        if (esVictoria) SceneManager.LoadScene("Game4_AR"); 
+        
     }
 }

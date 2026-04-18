@@ -33,7 +33,7 @@ public class Pensamiento : MonoBehaviour
         if (Vector3.Distance(Vector3.zero, transform.position) > 10f)
         {
             if (esDelEx && GameManagerAutoestima.instance != null)
-                GameManagerAutoestima.instance.ModificarAutoestima(-5);
+                GameManagerAutoestima.instance.ModificarAutoestima(-1);
             Destroy(gameObject);
         }
     }
@@ -62,13 +62,13 @@ public class Pensamiento : MonoBehaviour
 
         if (esDelEx)
         {
-            GameManagerAutoestima.instance.ModificarAutoestima(15);
+            GameManagerAutoestima.instance.ModificarAutoestima(1);
             GameManagerAutoestima.instance.PlaySonido(true);
             if (purpurinaPrefab != null) Instantiate(purpurinaPrefab, transform.position, Quaternion.identity);
         }
         else
         {
-            GameManagerAutoestima.instance.ModificarAutoestima(-10);
+            GameManagerAutoestima.instance.ModificarAutoestima(-1);
             GameManagerAutoestima.instance.PlaySonido(false);
         }
 

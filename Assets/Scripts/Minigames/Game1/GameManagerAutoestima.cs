@@ -8,7 +8,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
     public static GameManagerAutoestima instance; // Instancia ÚNICA
 
     [Header("Ajustes del GDD")]
-    public float autoestima = 10f;
+    public float autoestima = 5f;
     public float tiempoRestante = 10f;
     public bool juegoActivo = true;
     public string mensajeVictoria = "¡Felicidades, has ganado autoestima!";
@@ -65,7 +65,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         if (!juegoActivo) return;
 
         autoestima += cantidad;
-        autoestima = Mathf.Clamp(autoestima, 0, 100);
+        autoestima = Mathf.Clamp(autoestima, 0, 10);
 
         StopAllCoroutines();
         if (cantidad > 0) StartCoroutine(FeedbackCerebro(Color.white));
