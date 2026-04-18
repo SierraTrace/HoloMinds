@@ -88,6 +88,32 @@ public class GeneradorMensajes : MonoBehaviour
 
     public void FinalizarJuego(bool esVictoria)
     {
+        if (juegoTerminado) return;
+        juegoTerminado = true;
+        StopAllCoroutines();
+
+        StartCoroutine(SecuenciaSalidaAutomatica());
+    }
+
+    private IEnumerator SecuenciaSalidaAutomatica()
+    {
+        yield return new WaitForSeconds(1f); // pausa
+
+        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
+
+        if (endScript != null)
+        {
+            endScript.FinishMinigameWithScore(puntuacionActual);
+        }
+        else
+        {
+            Debug.LogError("MinigameEnd no encontrado");
+        }
+    }
+
+    // Versión anterior
+    /*public void FinalizarJuego(bool esVictoria)
+    {
         juegoTerminado = true;
         StopAllCoroutines(); 
 
@@ -111,5 +137,5 @@ public class GeneradorMensajes : MonoBehaviour
        
         if (esVictoria) SceneManager.LoadScene("Game4_AR"); 
         
-    }
+    }*/
 }
