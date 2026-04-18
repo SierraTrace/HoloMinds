@@ -82,6 +82,8 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         cerebroRenderer.color = Color.white;
     }
 
+    // Metodo de cambio de escena con botón, para pruebas
+    /*
     void FinDelJuego(bool ganado)
     {
         juegoActivo = false;
@@ -105,7 +107,41 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
 
             Debug.Log($"Puntuación final de {autoestima} enviada al MinigameEnd.");
         }
+    }*/
+
+    void FinDelJuego(bool ganado)
+    {
+        if (!juegoActivo) return;
+        juegoActivo = false;
+
+        panelGameOver.SetActive(true);
+
+        if (barraAutoestima != null) barraAutoestima.value = autoestima;
+
+        if (textoResultado != null)
+            textoResultado.text = ganado ? mensajeVictoria : mensajeDerrota;
+
+        StartCoroutine(EsperarYPasarDeNivel());
     }
+
+    System.Collections.IEnumerator EsperarYPasarDeNivel()
+    {
+        yield return new WaitForSeconds(1f);    // Espera para que el jugador vea el resultado
+
+        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
+
+        if (endScript != null)
+        {
+            int puntuacionFinal = Mathf.RoundToInt(autoestima);
+            endScript.FinishMinigameWithScore(puntuacionFinal);
+        }
+        else
+        {
+            Debug.LogError("No se encontró el script MinigameEnd en la escena.");
+        }
+    }
+
+
 
     public void Reiniciar()
     {
