@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 93f67a6f66cca474e93ff96178320e16
-  - enabled: 1
-    path: Assets/Scenes/Game1_2D/Game1_2D.unity
+  - enabled: 0
+    path: Assets/Scenes/Game1_2D/Game1_2D______.unity
     guid: 788ba3383625f1447ba61960bcbf1d8a
   - enabled: 1
+    path: Assets/Scenes/Game1_2D/Game1_2D.unity
+    guid: fbfec56ff205d4b07881b28015847e7d
+  - enabled: 1
     path: Assets/Scenes/Game2_2D/Game2_2D.unity
-    guid: 3aad8fc3225bb144395d4c4adf685f7a
+    guid: 70a50e97b1d43714a986550ca703f773
   - enabled: 1
     path: Assets/Scenes/Game3_2D/Game3_2D.unity
     guid: 2046ba19d96a9c54cab6fd7656ec5967
@@ -27,5 +30,10 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalScore/FinalScore.unity
     guid: e7acacd5ffde2634ab29a6442b45af67
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 63afca559989cb646b38d59a51ce05ba, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 768d9b0de95e01c4883940d523864a58, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c5f1642b0b6417148bef8fee859cb3c8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4e317cf0e12e6614b89824048a35ce49, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a2f6a4f35c10efd4a8ebce54f5310225, type: 2}
   m_UseUCBPForAssetBundles: 0
