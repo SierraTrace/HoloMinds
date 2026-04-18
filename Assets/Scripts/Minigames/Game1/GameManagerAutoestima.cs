@@ -57,7 +57,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         if (textoTimer != null)
             textoTimer.text = Mathf.Ceil(tiempoRestante).ToString();
 
-        if (tiempoRestante <= 0) FinDelJuego(autoestima > 10);
+        if (tiempoRestante <= 0) FinDelJuego(autoestima >= 5);
     }
 
     public void ModificarAutoestima(int cantidad)
