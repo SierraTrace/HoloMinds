@@ -5,14 +5,11 @@ public class ControladorTiempoAR : MonoBehaviour
 {
     public float tiempoRestante = 30f;
     public TextMeshProUGUI textoTemporizador; 
-    public GameObject botonFinal;            
+               
     
     private bool juegoTerminado = false;
 
-    void Start()
-    {
-        if (botonFinal != null) botonFinal.SetActive(false);
-    }
+ 
 
     void Update()
     {
@@ -35,13 +32,11 @@ public class ControladorTiempoAR : MonoBehaviour
         textoTemporizador.text = Mathf.CeilToInt(tiempo).ToString() + "s";
     }
 
-    void TerminarMicrojuego()
+    public void TerminarMicrojuego()
     {
         juegoTerminado = true;
         tiempoRestante = 0;
 
-        // 1. Mostramos el botón (que ya tiene el OnClick de Dani)
-        if (botonFinal != null) botonFinal.SetActive(true);
         textoTemporizador.gameObject.SetActive(false);
 
         // 2. Buscamos los scripts necesarios
@@ -52,7 +47,7 @@ public class ControladorTiempoAR : MonoBehaviour
         if (scriptInteraccion != null && scriptFinalCompas != null)
         {
             scriptFinalCompas.testScore = scriptInteraccion.puntosLocales;
-            Debug.Log("Puntos de AR inyectados en MinigameEnd: " + scriptFinalCompas.testScore);
+           SceneLoader.LoadNextScene();
         }
     }
 }
