@@ -581,8 +581,8 @@ GameObject:
   - component: {fileID: 961739752}
   - component: {fileID: 961739751}
   - component: {fileID: 961739750}
-  - component: {fileID: 961739755}
   - component: {fileID: 961739754}
+  - component: {fileID: 961739755}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -730,10 +730,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 961739749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2770166eb41e9f145920ea26b201117b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VRCameraController
-  mouseSensitivity: 2
+  m_EditorClassIdentifier: UnityEngine.SpatialTracking::UnityEngine.SpatialTracking.TrackedPoseDriver
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 1
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!1 &1002543271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8401b46bd8f2c04bbbc3cb88e2d1af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VRModeController
+  status: Iniciando...
+  vrActivo: 0
+  showDebugUI: 1
 --- !u!4 &1519412409
 Transform:
   m_ObjectHideFlags: 0
