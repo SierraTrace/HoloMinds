@@ -402,6 +402,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4971568726429076423, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717781717557213241, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447101663446143722, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8447101663446143722, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -409,6 +421,14 @@ PrefabInstance:
     - target: {fileID: 8447101663446143722, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: FinishMinigame
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134175247890834430, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215703720857607357, guid: c2e940ab6dcec4f998b3137441aeead0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
