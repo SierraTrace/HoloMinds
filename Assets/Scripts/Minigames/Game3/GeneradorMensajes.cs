@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement; // Necesario si quieres forzar salto de escen
 
 public class GeneradorMensajes : MonoBehaviour
 {
-    public GameObject prefabEx;
+    public GameObject prefabExNew;
     public GameObject prefabFamilia;
     public Transform puntoDeSpawn;
     public float tiempoEntreMensajes = 2f;
@@ -34,7 +34,7 @@ public class GeneradorMensajes : MonoBehaviour
             yield return new WaitForSeconds(tiempoEntreMensajes);
             
             
-            GameObject prefabAElegir = (Random.value > 0.5f) ? prefabEx : prefabFamilia;
+            GameObject prefabAElegir = (Random.value > 0.5f) ? prefabExNew : prefabFamilia;
             
             
             GameObject nuevoMensaje = Instantiate(prefabAElegir, GameObject.Find("Canvas").transform);
@@ -43,7 +43,7 @@ public class GeneradorMensajes : MonoBehaviour
             nuevoMensaje.GetComponent<RectTransform>().anchoredPosition = puntoDeSpawn.GetComponent<RectTransform>().anchoredPosition;
             
            
-            if (prefabAElegir == prefabEx)
+            if (prefabAElegir == prefabExNew)
             {
                 nuevoMensaje.tag = "MensajeRojo";
             }
