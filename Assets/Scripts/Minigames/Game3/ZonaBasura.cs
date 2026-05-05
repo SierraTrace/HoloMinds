@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Collections; //Para utilziar Corrutinas, animacioens de tiempo
 
 public class ZonaBasura : MonoBehaviour, IDropHandler
 {
+    //Cremos una etiqueta visual en inspector de unity para organizar las variables
+    [Header("Configuración para Ex")]
+    public GameObject prefabEfectoTranquilidad;
+    public AudioClip sonidoTranquilidad;
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
