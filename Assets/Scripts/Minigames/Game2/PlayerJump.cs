@@ -65,9 +65,15 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleFinJuego()
     {
-        StartCoroutine(SequencceDie());
+        // StartCoroutine(SequencceDie());
+
+        int finalscore = ScoreManager.Instance.GetFinalScore();
+        MinigameFlowController.Instance.EndGame(finalscore, EndType.Death);
     }
 
+
+    /* // Secuencia refactorizada en MinigameFlowController
+    
     private IEnumerator SequencceDie()
     {
         animator.SetBool("isRun", false);
@@ -111,6 +117,7 @@ public class PlayerJump : MonoBehaviour
 
         
     }
+    */
 
     private void OnCollisionExit2D(Collision2D collision)
     {
