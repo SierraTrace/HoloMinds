@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Configuration")]
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
     public float gameSpeed = 5f;
     public float gameDuration = 30f;        // Duración total del minijuego
 
@@ -42,6 +43,12 @@ public class ScoreManager : MonoBehaviour
         if (_isPaused) return;
 
         _timer -= Time.deltaTime;
+
+        if (timerText != null)
+        {
+            int seconds = Mathf.CeilToInt(_timer);
+            timerText.text = seconds.ToString();
+        }
 
         if (_timer < 0f)
         {
