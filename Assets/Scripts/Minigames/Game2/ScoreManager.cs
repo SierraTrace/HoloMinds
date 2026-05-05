@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
         if (timerText != null)
         {
             int seconds = Mathf.CeilToInt(_timer);
-            timerText.text = seconds.ToString();
+            timerText.text = seconds.ToString() + 's';
         }
 
         if (_timer < 0f)
