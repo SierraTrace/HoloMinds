@@ -53,6 +53,7 @@ public class ScoreManager : MonoBehaviour
         if (_timer < 0f)
         {
             _timer = 0f;
+            StopScore();
             int finalScore = GetFinalScore();
             MinigameFlowController.Instance.EndGame(finalScore, EndType.Timeout);
             return;

@@ -16,9 +16,15 @@ public class MinigameFlowController : MonoBehaviour
         Instance = this;
     }
 
+    private bool gameEnded = false;
+
     public void EndGame(int finalScore, EndType type)
     {
-        StartCoroutine(EndSequence(finalScore, type));
+        if (gameEnded) return;
+        {
+            gameEnded = true;
+            StartCoroutine(EndSequence(finalScore, type));
+        }
     }
 
     private IEnumerator EndSequence(int finalScore, EndType type)
@@ -34,15 +40,15 @@ public class MinigameFlowController : MonoBehaviour
             parallax.globalSpeed = 0;
         }
 
+        foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
+        {
+            obstacle.enabled = false;
+        }
+
         ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
         if (spawner != null)
         {
             spawner.StopAllCoroutines();
-        }
-
-        foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
-        {
-            obstacle.enabled = false;
         }
 
         PlayerJump player = FindObjectOfType<PlayerJump>();
@@ -52,12 +58,12 @@ public class MinigameFlowController : MonoBehaviour
             var rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.linearVelocity = Vector2.zero;
+                rb.simulated = false;
             }
 
             if (type == EndType.Death)
             {
-                player.GetComponent<Animator>().SetTrigger("Die");
+                player.GetComponent<Animator>().SetTrigger("die");
             }
         }
 
@@ -70,6 +76,10 @@ public class MinigameFlowController : MonoBehaviour
         if (end != null)
         {
             end.FinishMinigameWithScore(finalScore);
+        }
+        else
+        {
+            Debug.LogWarning("No MinigameEnd found in scene.");
         }
     }
 }
