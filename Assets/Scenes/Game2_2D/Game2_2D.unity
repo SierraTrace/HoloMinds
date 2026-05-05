@@ -1188,6 +1188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828736724}
   - component: {fileID: 828736725}
+  - component: {fileID: 828736726}
   m_Layer: 5
   m_Name: Barra autoestima
   m_TagString: Untagged
@@ -1267,6 +1268,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &828736726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828736723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8eddb282dfc3c4bbb58dec9c52498e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfEsteemBar
+  slider: {fileID: 828736725}
 --- !u!1 &1038877491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   scoreText: {fileID: 0}
   gameSpeed: 5
+  gameDuration: 30
 --- !u!4 &1221360695
 Transform:
   m_ObjectHideFlags: 0
