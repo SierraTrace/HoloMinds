@@ -1,7 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public enum  EndType { Death, Timeout}
+public enum  EndType
+{
+    Death,
+    Timeout
+}
 
 public class MinigameFlowController : MonoBehaviour
 {
@@ -12,7 +16,7 @@ public class MinigameFlowController : MonoBehaviour
         Instance = this;
     }
 
-    public void EndGame(int finalScore, Type)
+    public void EndGame(int finalScore, EndType type)
     {
         StartCoroutine(EndSequence(finalScore, type));
     }
