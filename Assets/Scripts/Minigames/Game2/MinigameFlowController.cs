@@ -21,10 +21,10 @@ public class MinigameFlowController : MonoBehaviour
     public void EndGame(int finalScore, EndType type)
     {
         if (gameEnded) return;
-        {
-            gameEnded = true;
-            StartCoroutine(EndSequence(finalScore, type));
-        }
+        
+        gameEnded = true;
+        StartCoroutine(EndSequence(finalScore, type));
+        
     }
 
     private IEnumerator EndSequence(int finalScore, EndType type)
@@ -64,6 +64,16 @@ public class MinigameFlowController : MonoBehaviour
             if (type == EndType.Death)
             {
                 player.GetComponent<Animator>().SetTrigger("die");
+
+                CameraShake shaker = Camera.main.GetComponent<CameraShake>();
+                if (shaker != null)
+                {
+                    shaker.Shake(0.4f, 0.3f);
+                }
+                else
+                {
+                    Debug.LogWarning("No CameraShaker found on main camera.");
+                }
             }
         }
 
