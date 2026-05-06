@@ -34,6 +34,11 @@ public class MinigameFlowController : MonoBehaviour
             ScoreManager.Instance.StopScore();
         }
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBackgroundMusic();
+        }
+
         ParallaxController parallax = FindObjectOfType<ParallaxController>();
         if (parallax != null)
         {
