@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 1196886177}
   m_Layer: 5
   m_Name: GeneradorMensajes
-  m_TagString: Untagged
+  m_TagString: MensajeRojo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -890,6 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce29d82e61f44af3a1a9a290919d40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaBasura
+  prefabEfectoTranquilidad: {fileID: 7247377875866301059, guid: b0411fd1f1bef4ed1a6734d013a01bc1, type: 3}
+  sonidoTranquilidad: {fileID: 8300000, guid: 7dd221341022c4e8883267fec1695857, type: 3}
 --- !u!114 &1606656794
 MonoBehaviour:
   m_ObjectHideFlags: 0
