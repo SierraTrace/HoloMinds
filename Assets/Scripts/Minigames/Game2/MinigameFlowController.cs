@@ -34,6 +34,14 @@ public class MinigameFlowController : MonoBehaviour
             ScoreManager.Instance.StopScore();
         }
 
+        if (type == EndType.Death)
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayImpactSound();
+            }
+        }
+
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.StopBackgroundMusic();
