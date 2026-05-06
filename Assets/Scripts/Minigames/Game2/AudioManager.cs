@@ -12,6 +12,13 @@ public class AudioManager : MonoBehaviour
     public float maxMusicVolume = 0.5f;
     public float fadeInDuration = 2.0f;
 
+    [Header("Configuración de SFX")]
+    public AudioSource sfxSource;
+
+    [Header("Clips de audio SFX")]
+    public AudioClip jumpSound;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,6 +42,25 @@ public class AudioManager : MonoBehaviour
             musicSource.loop = true;
             musicSource.playOnAwake = false;
             musicSource.volume = 0f;            // Ajustado de inicio a 0 para el fade-in  
+        }
+
+        if (sfxSource == null)
+        {
+            AudioSource[] sources = GetComponents<AudioSource>();
+            if (sources.Length > 1)
+            {
+                sfxSource = sources[1];
+            }
+            else
+            {
+                sfxSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (sfxSource != null)
+        {
+            sfxSource.playOnAwake = false;
+            sfxSource.loop = false;
         }
     }
 
@@ -80,13 +106,29 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = maxMusicVolume;
     }
 
+    public void PlaySFX(AudioClip clip)
+    {
+        if (sfxSource != null && clip != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: No se puede reproducir el SFX. Falta AudioSource o AudioClip.");
+        }
+    }
 
-
-
-
-
-
-
+    public void PlayJumpSound()
+    {
+        if (jumpSound != null)
+        {
+            PlaySFX(jumpSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: No se puede reproducir el sonido de salto. Falta AudioClip.");
+        }
+    }
 
 
 
