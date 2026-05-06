@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5fdb13d3756c84fecac96f5a2d124370
+guid: 724131bc8a7f34041bb9f1701f0cb58d
 labels:
 - Audio
 - Casual
@@ -31,5 +31,5 @@ AssetOrigin:
   productId: 54116
   packageName: FREE Casual Game SFX Pack
   packageVersion: 1.1
-  assetPath: Assets/Art/Audio/Game1/DM-CGS-25.wav
+  assetPath: Assets/Casual Game Sounds U6/CasualGameSounds/DM-CGS-16.wav
   uploadId: 688818
