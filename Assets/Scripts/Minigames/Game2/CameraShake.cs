@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class CameraShake : MonoBehaviour
 {
     private Vector3 originalPos;
 

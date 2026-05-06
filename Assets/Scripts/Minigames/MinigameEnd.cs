@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MinigameEnd : MonoBehaviour
 {
-    public int minigameIndex;   // �ndice del minijuego actual, asignado en el Inspector
+    public int minigameIndex;   // Indice del minijuego actual, asignado en el Inspector
     public int testScore = 100; // TODO Puntuaci�n de prueba para simular el resultado del minijuego
 
     public void FinishMinigame()  // M�todo para finalizar el minijuego sin una puntuaci�n real (usado para pruebas)
