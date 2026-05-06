@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Clips de audio SFX")]
     public AudioClip jumpSound;
+    public AudioClip impactSound;
 
 
     private void Awake()
@@ -127,6 +128,18 @@ public class AudioManager : MonoBehaviour
         else
         {
             Debug.LogWarning("AudioManager: No se puede reproducir el sonido de salto. Falta AudioClip.");
+        }
+    }
+
+    public void PlayImpactSound()
+    {
+        if (impactSound != null)
+        {
+            PlaySFX(impactSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: No se puede reproducir el sonido de impacto. Falta AudioClip.");
         }
     }
 
