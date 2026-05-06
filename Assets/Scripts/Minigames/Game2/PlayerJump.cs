@@ -45,6 +45,10 @@ public class PlayerJump : MonoBehaviour
 
             animator.SetBool("isRun", false);
             animator.SetBool("isJump", true);
+
+            if (AudioManager.Instance != null)            {
+                AudioManager.Instance.PlayJumpSound();
+            }
         }
     }
 
