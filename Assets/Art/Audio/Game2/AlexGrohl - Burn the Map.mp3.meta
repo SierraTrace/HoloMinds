@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: b6891bf38a3df44b29d9271a7acfea03
-AssetOrigin:
-  serializedVersion: 1
-  productId: 221545
-  packageName: Adventure Music and SFX
-  packageVersion: 1.0
-  assetPath: Assets/WhatSoundsNice/Adventure Music & SFX/Music/Loops/call_to_adventure_loop.wav
-  uploadId: 498390
+guid: 82cd9e9dcbd646b4a92071ea36ea6f3a
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -18,7 +11,7 @@ AudioImporter:
     compressionFormat: 1
     quality: 1
     conversionMode: 0
-    preloadAudioData: 1
+    preloadAudioData: 0
   platformSettingOverrides: {}
   forceToMono: 0
   normalize: 1
