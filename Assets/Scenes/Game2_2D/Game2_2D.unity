@@ -493,6 +493,7 @@ MonoBehaviour:
   sfxSource: {fileID: 165515654}
   jumpSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   impactSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+  timerWarningSound: {fileID: 8300000, guid: a7dd02b494a907a4fa2961bf1e66523b, type: 3}
 --- !u!4 &298809457
 Transform:
   m_ObjectHideFlags: 0
@@ -1982,6 +1983,8 @@ MonoBehaviour:
   timerText: {fileID: 2042623340}
   gameSpeed: 5
   gameDuration: 29
+  warningcolor: {r: 1, g: 0, b: 0, a: 1}
+  blinkInterval: 0.2
 --- !u!4 &1221360695
 Transform:
   m_ObjectHideFlags: 0

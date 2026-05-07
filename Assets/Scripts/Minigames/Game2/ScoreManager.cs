@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -11,9 +12,15 @@ public class ScoreManager : MonoBehaviour
     public float gameSpeed = 5f;
     public float gameDuration = 30f;        // Duración total del minijuego
 
+    [Header("Feedback Visual")]
+    public Color warningcolor = Color.red;
+    public float blinkInterval = 0.5f;
+
     private float _currentDistance;
     private float _timer;
     private bool _isPaused = false;
+    private bool _isWarningActive = false;
+    private Color _originalColor;
 
     private void Awake()
     {
@@ -23,6 +30,11 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         _timer = gameDuration;
+
+        if (timerText != null)
+        {
+            _originalColor = timerText.color;
+        }            
 
         float maxScore = gameSpeed * gameDuration;
 
@@ -50,6 +62,12 @@ public class ScoreManager : MonoBehaviour
             timerText.text = seconds.ToString() + 's';
         }
 
+        if (_timer <= 5f && !_isWarningActive)
+        {
+            _isWarningActive = true;
+            StartCoroutine(BlinkTimerRoutine());
+        }
+
         if (_timer < 0f)
         {
             _timer = 0f;
@@ -72,6 +90,31 @@ public class ScoreManager : MonoBehaviour
             SelfEsteemBar.Instance.SetValue(_currentDistance);
         }
     }
+
+
+
+    private IEnumerator BlinkTimerRoutine()
+    {
+        while (_timer > 0 && !_isPaused)
+        {
+            timerText.color = warningcolor;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayTimerWarning();
+            }
+
+            yield return new WaitForSeconds(blinkInterval);
+
+            timerText.color = _originalColor;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        timerText.color = _originalColor;
+    }
+
+
+
 
     public int GetFinalScore() => Mathf.FloorToInt(_currentDistance);
 
