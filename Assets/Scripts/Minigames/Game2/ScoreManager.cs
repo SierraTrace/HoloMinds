@@ -119,9 +119,10 @@ public class ScoreManager : MonoBehaviour
 
             if (anim != null) 
             {
-                anim.Play("idle");
                 anim.SetBool("isRun", false);
                 anim.SetBool("isJump", false);
+                anim.Play("idle", 0, 0f);
+                anim.Update(0f); // Forzar actualización para aplicar el cambio de animación inmediatamente
             }
 
             if (rb != null)
@@ -130,6 +131,8 @@ public class ScoreManager : MonoBehaviour
             }
 
             player.enabled = false;
+
+            StartCoroutine(FreezeAnimator(anim));
         }
 
         StopScore();
@@ -210,6 +213,17 @@ public class ScoreManager : MonoBehaviour
             SelfEsteemBar.Instance.SetValue(_currentDistance);
         }
     }
+
+    private IEnumerator FreezeAnimator(Animator anim)
+    {
+        if (anim == null) yield break;
+
+        yield return new WaitForEndOfFrame();
+
+        anim.enabled = false;
+    }
+
+
 
     /*
     private void prepareVisualStop()
