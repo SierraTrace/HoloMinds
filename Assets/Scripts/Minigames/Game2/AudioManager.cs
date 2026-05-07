@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     [Header("Clips de audio SFX")]
     public AudioClip jumpSound;
     public AudioClip impactSound;
+    public AudioClip timerWarningSound;
 
 
     private void Awake()
@@ -142,6 +143,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayTimerWarning()
+    {
+        if (timerWarningSound != null)
+        {
+            PlaySFX(timerWarningSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: No se puede reproducir el sonido de advertencia del temporizador. Falta AudioClip.");
+        }
+    }
 
 
 }
