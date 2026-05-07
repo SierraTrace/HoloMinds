@@ -87,12 +87,40 @@ public class ScoreManager : MonoBehaviour
 
     private IEnumerator FinalSequenceWithBonus()
     {
-        
-        if (MinigameFlowController.Instance != null)
+        if (AudioManager.Instance != null)
         {
-            StopScore();
-            prepareVisualStop();
+            AudioManager.Instance.StopBackgroundMusic();
         }
+
+        ParallaxController parallax = FindObjectOfType<ParallaxController>();
+        if (parallax != null)
+        {
+            parallax.globalSpeed = 0f;
+        }
+
+        foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
+        {
+            obstacle.enabled = false;
+        }
+
+        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
+        if (spawner != null)
+        {
+            spawner.StopAllCoroutines();
+        }
+
+        PlayerJump player = FindObjectOfType<PlayerJump>();
+        if (player != null)
+        {
+            player.DisableJumping();
+            Animator anim = player.GetComponent<Animator>();
+            if (anim != null) 
+            {
+                anim.SetBool("isRun", false);
+            }
+        }
+
+        StopScore();
 
         yield return new WaitForSeconds(0.5f);
 
@@ -105,6 +133,7 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
 
         _currentDistance += 100;
+
         UpdateScoreUI();
 
         yield return new WaitForSeconds(0.5f);
@@ -170,7 +199,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-
+    /*
     private void prepareVisualStop()
     {
         if (AudioManager.Instance != null)
@@ -189,6 +218,10 @@ public class ScoreManager : MonoBehaviour
             obstacle.enabled = false;
         }
 
+
+
+
+
         ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
         if (spawner != null)
         {
@@ -198,10 +231,25 @@ public class ScoreManager : MonoBehaviour
         PlayerJump player = FindObjectOfType<PlayerJump>();
         if (player != null)
         {
+            Animator anim = player.GetComponent<Animator>();
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+            if (anim != null)
+            {
+                anim.SetBool("isRun", false);
+                anim.SetBool("isJump", false);
+            }
+
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2(0f, rb.linearVelocity.y);
+            }
+
             player.enabled = false;
+
         }
 
-    }
+    }*/
 
 
 }
