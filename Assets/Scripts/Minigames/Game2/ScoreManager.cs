@@ -113,11 +113,23 @@ public class ScoreManager : MonoBehaviour
         if (player != null)
         {
             player.DisableJumping();
+
             Animator anim = player.GetComponent<Animator>();
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+
             if (anim != null) 
             {
+                anim.Play("idle");
                 anim.SetBool("isRun", false);
+                anim.SetBool("isJump", false);
             }
+
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+
+            player.enabled = false;
         }
 
         StopScore();
