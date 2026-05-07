@@ -98,6 +98,12 @@ public class ScoreManager : MonoBehaviour
         while (_timer > 0 && !_isPaused)
         {
             timerText.color = warningcolor;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayTimerWarning();
+            }
+
             yield return new WaitForSeconds(blinkInterval);
 
             timerText.color = _originalColor;
@@ -106,6 +112,8 @@ public class ScoreManager : MonoBehaviour
 
         timerText.color = _originalColor;
     }
+
+
 
 
     public int GetFinalScore() => Mathf.FloorToInt(_currentDistance);
