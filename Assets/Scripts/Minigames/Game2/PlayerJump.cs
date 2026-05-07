@@ -137,4 +137,9 @@ public class PlayerJump : MonoBehaviour
         // jumpAction.Disable();
         jumpAction.Dispose();
     }
+
+    public void DisableJumping()
+    {
+        jumpAction.Disable();
+    }
 }

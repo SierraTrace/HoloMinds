@@ -18,6 +18,8 @@ public class MinigameFlowController : MonoBehaviour
 
     private bool gameEnded = false;
 
+
+
     public void EndGame(int finalScore, EndType type)
     {
         if (gameEnded) return;
@@ -26,6 +28,8 @@ public class MinigameFlowController : MonoBehaviour
         StartCoroutine(EndSequence(finalScore, type));
         
     }
+
+
 
     private IEnumerator EndSequence(int finalScore, EndType type)
     {
