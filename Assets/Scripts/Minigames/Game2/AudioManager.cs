@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip impactSound;
     public AudioClip timerWarningSound;
+    public AudioClip rewardSound;
 
 
     private void Awake()
@@ -155,5 +156,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayReguardSound()
+    {
+        if (rewardSound != null)
+        {
+            PlaySFX(rewardSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: No se puede reproducir el sonido de recompensa. Falta AudioClip.");
+        }
+    }
 
 }
