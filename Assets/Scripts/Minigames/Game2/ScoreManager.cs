@@ -87,19 +87,34 @@ public class ScoreManager : MonoBehaviour
 
     private IEnumerator FinalSequenceWithBonus()
     {
-        // Bonus Animation
-        Vector3 centerScreen = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-        bonusAnimator.StartAnimation(centerScreen, scoreTargetPosition);
+        
+        if (MinigameFlowController.Instance != null)
+        {
+            StopScore();
+            prepareVisualStop();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (bonusAnimator != null)
+        {
+            Vector3 centerScreen = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+            bonusAnimator.StartAnimation(centerScreen, scoreTargetPosition);
+        }
 
         yield return new WaitForSeconds(0.9f);
 
         _currentDistance += 100;
-        UpdateScoreUI();                // TODO: Implementar
+        UpdateScoreUI();
 
         yield return new WaitForSeconds(0.5f);
 
         int finalScore = GetFinalScore();
-        MinigameFlowController.Instance.EndGame(finalScore, EndType.Timeout);
+        MinigameEnd end = FindObjectOfType<MinigameEnd>();
+        if (end != null)
+        {
+            end.FinishMinigameWithScore(finalScore);
+        }
     }
 
 
@@ -153,6 +168,39 @@ public class ScoreManager : MonoBehaviour
         {
             SelfEsteemBar.Instance.SetValue(_currentDistance);
         }
+    }
+
+
+    private void prepareVisualStop()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBackgroundMusic();
+        }
+
+        ParallaxController parallax = FindObjectOfType<ParallaxController>();
+        if (parallax != null)
+        {
+            parallax.globalSpeed = 0f;
+        }
+
+        foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
+        {
+            obstacle.enabled = false;
+        }
+
+        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
+        if (spawner != null)
+        {
+            spawner.StopAllCoroutines();
+        }
+
+        PlayerJump player = FindObjectOfType<PlayerJump>();
+        if (player != null)
+        {
+            player.enabled = false;
+        }
+
     }
 
 
