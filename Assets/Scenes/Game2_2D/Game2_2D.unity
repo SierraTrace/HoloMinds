@@ -1576,7 +1576,6 @@ RectTransform:
   m_LocalScale: {x: 1.12037, y: 1.12037, z: 1.12037}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1206875559}
   - {fileID: 189773903}
   - {fileID: 1847812094}
   m_Father: {fileID: 1773823325}
@@ -1823,7 +1822,7 @@ GameObject:
   - component: {fileID: 1206875561}
   - component: {fileID: 1206875560}
   m_Layer: 5
-  m_Name: score
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1838,14 +1837,14 @@ RectTransform:
   m_GameObject: {fileID: 1206875558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8925622, y: 0.8925622, z: 0.8925622}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 828736724}
+  m_Father: {fileID: 1773823325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 390, y: -10.000111}
+  m_AnchoredPosition: {x: 436.94434, y: -56.018543}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206875560
@@ -1873,7 +1872,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: c194f3c6474c47848909ef9a58bdd122, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2093,6 +2092,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2042623339}
+  - {fileID: 1206875559}
   - {fileID: 828736724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2262,7 +2262,7 @@ GameObject:
   - component: {fileID: 2042623341}
   - component: {fileID: 2042623340}
   m_Layer: 5
-  m_Name: RelojTexto
+  m_Name: Crono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_text: Reloj
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 05507f9db21cb7446b9a9958419766f1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
