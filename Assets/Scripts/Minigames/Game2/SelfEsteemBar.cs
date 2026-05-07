@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SelfEsteemBar : MonoBehaviour
 {
     public static SelfEsteemBar Instance;
 
     public Slider slider;
+    public TextMeshProUGUI scoreText;
+
 
     private void Awake()
     {
@@ -20,5 +23,10 @@ public class SelfEsteemBar : MonoBehaviour
     public void SetValue(float value)
     {
         slider.value = value;
+
+        if (scoreText != null)
+        {
+            scoreText.text = Mathf.FloorToInt(value).ToString();
+        }
     }
 }
