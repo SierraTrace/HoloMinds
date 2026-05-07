@@ -1841,7 +1841,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   timerText: {fileID: 2042623340}
   gameSpeed: 5
-  gameDuration: 30
+  gameDuration: 29
 --- !u!4 &1221360695
 Transform:
   m_ObjectHideFlags: 0
