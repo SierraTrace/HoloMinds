@@ -42,7 +42,7 @@ namespace ClearSky
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            anim.SetBool("isJump", false);
+            anim?.SetBool("isJump", false);
         }
         void KickBoard()
         {
