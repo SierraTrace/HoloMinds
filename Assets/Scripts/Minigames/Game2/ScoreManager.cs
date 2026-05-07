@@ -11,6 +11,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public float gameSpeed = 5f;
     public float gameDuration = 30f;        // Duración total del minijuego
+    public BonusAnimator bonusAnimator;
+    public Transform scoreTargetPosition;
 
     [Header("Feedback Visual")]
     public Color warningcolor = Color.red;
@@ -72,23 +74,32 @@ public class ScoreManager : MonoBehaviour
         {
             _timer = 0f;
             StopScore();
-            int finalScore = GetFinalScore();
-            MinigameFlowController.Instance.EndGame(finalScore, EndType.Timeout);
-            return;
+            StartCoroutine(FinalSequenceWithBonus());
         }
 
         // Calcular distancia
         _currentDistance += gameSpeed * Time.deltaTime;
 
-        if (scoreText != null)
-        {
-            scoreText.text = Mathf.FloorToInt(_currentDistance).ToString() + " m";
-        }
+        UpdateScoreUI();
+    }
 
-        if (SelfEsteemBar.Instance != null)
-        {
-            SelfEsteemBar.Instance.SetValue(_currentDistance);
-        }
+
+
+    private IEnumerator FinalSequenceWithBonus()
+    {
+        // Bonus Animation
+        Vector3 centerScreen = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        bonusAnimator.StartAnimation(centerScreen, scoreTargetPosition);
+
+        yield return new WaitForSeconds(0.9f);
+
+        _currentDistance += 100;
+        UpdateScoreUI();                // TODO: Implementar
+
+        yield return new WaitForSeconds(0.5f);
+
+        int finalScore = GetFinalScore();
+        MinigameFlowController.Instance.EndGame(finalScore, EndType.Timeout);
     }
 
 
@@ -130,5 +141,19 @@ public class ScoreManager : MonoBehaviour
             end.FinishMinigameWithScore(finalScore);
         }
     }
+
+
+    private void UpdateScoreUI()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = Mathf.FloorToInt(_currentDistance).ToString() + " m";
+        }
+        if (SelfEsteemBar.Instance != null)
+        {
+            SelfEsteemBar.Instance.SetValue(_currentDistance);
+        }
+    }
+
 
 }

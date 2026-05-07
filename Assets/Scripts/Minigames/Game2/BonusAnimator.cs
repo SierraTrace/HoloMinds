@@ -5,8 +5,8 @@ using System.Collections;
 public class BonusAnimator : MonoBehaviour
 {
     public TextMeshProUGUI textMesh;
-    public float duration = 0,8f;
-    public Vector3 startScale = new Vector3(2.5f, 2.5f.1);
+    public float duration = 0.8f;
+    public Vector3 startScale = new Vector3(2.5f, 2.5f, 1);
     public Vector3 endScale = new Vector3(0.5f, 0.5f, 1);
 
     public void StartAnimation(Vector3 startPos, Transform targetTransform)
@@ -34,7 +34,7 @@ public class BonusAnimator : MonoBehaviour
 
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayRewardSound();
+            AudioManager.Instance.PlayReguardSound();
             gameObject.SetActive(false);
         }
 
