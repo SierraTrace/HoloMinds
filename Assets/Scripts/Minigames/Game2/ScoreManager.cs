@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Feedback Visual")]
     public Color warningcolor = Color.red;
-    public float blinkInterval = 0.2f;
+    public float blinkInterval = 0.5f;
 
     private float _currentDistance;
     private float _timer;
