@@ -38,7 +38,7 @@ public class FinalScoreUI : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        totalScoreText.text = "Puntuación Total: " + {GameManager.Instance.totalScore};
+        totalScoreText.text = "Puntuación Total: " + GameManager.Instance.totalScore;
 
         yield return new WaitForSeconds(0.5f);
 
