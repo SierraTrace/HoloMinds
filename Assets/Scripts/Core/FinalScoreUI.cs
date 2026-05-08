@@ -32,7 +32,7 @@ public class FinalScoreUI : MonoBehaviour
         {
             yield return new WaitForSeconds(delayBetweenScores);
 
-            scoresListText.text += $"Juego {i + 1}: {scores[i]} pts\n";
+            scoresListText.text += $"Juego {i + 1}: {scores[i]}\n";
 
             // TODO: Llamada a sonido de puntuación aquí
         }
