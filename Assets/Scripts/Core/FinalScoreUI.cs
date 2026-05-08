@@ -11,6 +11,7 @@ public class FinalScoreUI : MonoBehaviour
 
     [Header("Configuración")]
     public float delayBetweenScores = 0.8f;
+    public float scoreCountSpeed = 100f;
 
     void Start()
     {
@@ -38,7 +39,15 @@ public class FinalScoreUI : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        totalScoreText.text = "Puntuación Total: " + GameManager.Instance.totalScore;
+        float currentDisplayScore = 0;
+        while (currentDisplayScore < GameManager.Instance.totalScore)
+        {
+            currentDisplayScore += Time.deltaTime * scoreCountSpeed;
+            totalScoreText.text = "TOTAL: " + Mathf.Round(currentDisplayScore);
+            yield return null;
+        }
+
+        // totalScoreText.text = "Puntuación Total: " + GameManager.Instance.totalScore;
 
         yield return new WaitForSeconds(0.5f);
 
