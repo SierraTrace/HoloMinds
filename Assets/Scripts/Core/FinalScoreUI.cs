@@ -23,7 +23,7 @@ public class FinalScoreUI : MonoBehaviour
     }
 
 
-    private IEnumerator ShowScoreSequence()
+    private IEnumerator ShowScoresSequence()
     {
         int[] scores = GameManager.Instance.gameScores;
 
