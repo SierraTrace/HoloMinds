@@ -21,6 +21,11 @@ public class BonusAnimator : MonoBehaviour
         transform.position = startPos;
         transform.localScale = startScale;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayReguardSound();
+        }
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -30,13 +35,8 @@ public class BonusAnimator : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, target.position, curve);
             transform.localScale = Vector3.Lerp(startScale, endScale, curve);
             yield return null;
-        }
+        }        
 
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayReguardSound();
-            gameObject.SetActive(false);
-        }
-
+        gameObject.SetActive(false);
     }
 }
