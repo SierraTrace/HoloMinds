@@ -474,8 +474,8 @@ MonoBehaviour:
   animationDuration: 1
   titleTargetPos: {x: 0, y: 100}
   descTargetPos: {x: 0, y: 0}
-  levelTitle: Minijuego 1
-  levelDescription: Atrapa todos los corazones rotos
+  levelTitle: MINIJUEGO X
+  levelDescription: ATRAPA TODOS LOS CORAZONES ROTOS
 --- !u!4 &742977488
 Transform:
   m_ObjectHideFlags: 0

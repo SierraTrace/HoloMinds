@@ -16,8 +16,8 @@ public class TransitionManager : MonoBehaviour
     public Vector2 descTargetPos = new Vector2(0, 0);
 
     [Header("Textos del Nivel")]
-    public string levelTitle = "Minijuego 1";
-    public string levelDescription = "Atrapa todos los corazones rotos";
+    public string levelTitle = "MINIJUEGO X";
+    public string levelDescription = "¡ATRAPA TODOS LOS CORAZONES ROTOS!";
     
 
     void Start()
@@ -71,8 +71,7 @@ public class TransitionManager : MonoBehaviour
     
         yield return new WaitForSeconds(1f);
 
-        // TODO: Cargar siguiente mnijuego
-        // SceneManager.LoadScene("NombreDeTuMinijuego");
+        SceneLoader.LoadNextScene();
 
     }
 
