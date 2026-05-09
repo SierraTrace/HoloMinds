@@ -40,16 +40,18 @@ public class TransitionManager : MonoBehaviour
     {
 
         float elapsed = 0f;
-
-        if (TransitionAudioManager.Instance != null)
-        {
-            TransitionAudioManager.Instance.PlaySwoosh();
-        }
-
+        
 
         // Animar el título y la descripción hacia sus posiciones objetivo
         while (elapsed < animationDuration)
         {
+
+            if (elapsed == 0 && TransitionAudioManager.Instance != null)
+            {
+                TransitionAudioManager.Instance.PlaySwoosh();
+            }
+
+
             elapsed += Time.deltaTime;
             float t = elapsed / animationDuration;
             float curve = t * t * (3f - 2f * t);
@@ -86,7 +88,7 @@ public class TransitionManager : MonoBehaviour
             TransitionAudioManager.Instance.PlayGo();
         }
     
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
 
         SceneLoader.LoadNextScene();
 

@@ -405,9 +405,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TransitionAudioManager
   AudioSource: {fileID: 133402330}
-  swooshSound: {fileID: 0}
-  tickSound: {fileID: 0}
-  goSound: {fileID: 0}
+  swooshSound: {fileID: 8300000, guid: e134c4461b386f843938e818ad1b591c, type: 3}
+  tickSound: {fileID: 8300000, guid: ce3500fe9b598774596bc02c7beb4dff, type: 3}
+  goSound: {fileID: 8300000, guid: 821139655cd32e34295f4715ac81861f, type: 3}
 --- !u!4 &226980232
 Transform:
   m_ObjectHideFlags: 0
@@ -649,7 +649,7 @@ MonoBehaviour:
   titleText: {fileID: 1841572013}
   descriptionText: {fileID: 1417311789}
   countdownText: {fileID: 1821710629}
-  animationDuration: 1
+  animationDuration: 0.8
   titleTargetPos: {x: 0, y: 100}
   descTargetPos: {x: 0, y: 0}
   levelTitle: MINIJUEGO X
