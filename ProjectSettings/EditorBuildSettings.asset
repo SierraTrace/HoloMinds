@@ -7,10 +7,10 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: 3abaf86d702e6f84f95840def2fb1b51
+  - enabled: 1
+    path: Assets/Scenes/Transitions/Generic.unity
     guid: 93f67a6f66cca474e93ff96178320e16
-  - enabled: 0
-    path: Assets/Scenes/Game1_2D/Game1_2D______.unity
-    guid: 788ba3383625f1447ba61960bcbf1d8a
   - enabled: 1
     path: Assets/Scenes/Game1_2D/Game1_2D.unity
     guid: fbfec56ff205d4b07881b28015847e7d
