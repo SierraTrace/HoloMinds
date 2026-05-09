@@ -41,6 +41,12 @@ public class TransitionManager : MonoBehaviour
 
         float elapsed = 0f;
 
+        if (TransitionAudioManager.Instance != null)
+        {
+            TransitionAudioManager.Instance.PlaySwoosh();
+        }
+
+
         // Animar el título y la descripción hacia sus posiciones objetivo
         while (elapsed < animationDuration)
         {
@@ -54,13 +60,19 @@ public class TransitionManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(1f);
+
         // Cuenta atrás
         int remainingTime = 5;
         while (remainingTime > 0)
         {
             countdownText.GetComponent<TextMeshProUGUI>().text = remainingTime.ToString();
-
             countdownText.localScale = Vector3.one * 1.5f;
+
+            if (TransitionAudioManager.Instance != null)
+            {
+                TransitionAudioManager.Instance.PlayTick();
+            }
 
             yield return new WaitForSeconds(1f);
             remainingTime--;
@@ -68,6 +80,11 @@ public class TransitionManager : MonoBehaviour
 
         countdownText.GetComponent<TextMeshProUGUI>().text = "¡GO!";
         countdownText.localScale = Vector3.one * 2f;
+
+        if (TransitionAudioManager.Instance != null)
+        {
+            TransitionAudioManager.Instance.PlayGo();
+        }
     
         yield return new WaitForSeconds(1f);
 
