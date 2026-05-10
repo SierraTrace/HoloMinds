@@ -7,22 +7,34 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
-    guid: 93f67a6f66cca474e93ff96178320e16
-  - enabled: 0
-    path: Assets/Scenes/Game1_2D/Game1_2D______.unity
-    guid: 788ba3383625f1447ba61960bcbf1d8a
+    guid: 3abaf86d702e6f84f95840def2fb1b51
+  - enabled: 1
+    path: Assets/Scenes/Transitions/TransitionGame1.unity
+    guid: e065a010f74426741ba2994855859359
   - enabled: 1
     path: Assets/Scenes/Game1_2D/Game1_2D.unity
     guid: fbfec56ff205d4b07881b28015847e7d
   - enabled: 1
+    path: Assets/Scenes/Transitions/TransitionGame2.unity
+    guid: 02e7a78359bf28d4eab04f67175fb794
+  - enabled: 1
     path: Assets/Scenes/Game2_2D/Game2_2D.unity
     guid: 70a50e97b1d43714a986550ca703f773
+  - enabled: 1
+    path: Assets/Scenes/Transitions/TransitionGame3.unity
+    guid: 05cf61c66130b65438aacef5a52c0921
   - enabled: 1
     path: Assets/Scenes/Game3_2D/Game3_2D.unity
     guid: 2046ba19d96a9c54cab6fd7656ec5967
   - enabled: 1
+    path: Assets/Scenes/Transitions/TransitionGame4.unity
+    guid: 0ca816eee2b720749934a5707f9cb6be
+  - enabled: 1
     path: Assets/Scenes/Game4_AR/Game4_AR.unity
     guid: fe6f79079babb5e43a919f0fc4f6ddeb
+  - enabled: 1
+    path: Assets/Scenes/Transitions/TransitionGame5.unity
+    guid: e7d55ffd3e155f1438306312d6b42313
   - enabled: 1
     path: Assets/Scenes/Game5_VR/Game5_VR.unity
     guid: e29018cab76c4b448b15fd768bcddc9e
@@ -30,5 +42,10 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalScore/FinalScore.unity
     guid: e7acacd5ffde2634ab29a6442b45af67
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 63afca559989cb646b38d59a51ce05ba, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 768d9b0de95e01c4883940d523864a58, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c5f1642b0b6417148bef8fee859cb3c8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4e317cf0e12e6614b89824048a35ce49, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a2f6a4f35c10efd4a8ebce54f5310225, type: 2}
   m_UseUCBPForAssetBundles: 0

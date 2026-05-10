@@ -8,7 +8,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
     public static GameManagerAutoestima instance; // Instancia ÚNICA
 
     [Header("Ajustes del GDD")]
-    public float autoestima = 10f;
+    public float autoestima = 5f;
     public float tiempoRestante = 10f;
     public bool juegoActivo = true;
     public string mensajeVictoria = "¡Felicidades, has ganado autoestima!";
@@ -57,7 +57,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         if (textoTimer != null)
             textoTimer.text = Mathf.Ceil(tiempoRestante).ToString();
 
-        if (tiempoRestante <= 0) FinDelJuego(autoestima > 10);
+        if (tiempoRestante <= 0) FinDelJuego(autoestima >= 5);
     }
 
     public void ModificarAutoestima(int cantidad)
@@ -65,7 +65,7 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         if (!juegoActivo) return;
 
         autoestima += cantidad;
-        autoestima = Mathf.Clamp(autoestima, 0, 100);
+        autoestima = Mathf.Clamp(autoestima, 0, 10);
 
         StopAllCoroutines();
         if (cantidad > 0) StartCoroutine(FeedbackCerebro(Color.white));
@@ -82,6 +82,8 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         cerebroRenderer.color = Color.white;
     }
 
+    // Metodo de cambio de escena con botón, para pruebas
+    /*
     void FinDelJuego(bool ganado)
     {
         juegoActivo = false;
@@ -105,7 +107,41 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
 
             Debug.Log($"Puntuación final de {autoestima} enviada al MinigameEnd.");
         }
+    }*/
+
+    void FinDelJuego(bool ganado)
+    {
+        if (!juegoActivo) return;
+        juegoActivo = false;
+
+        panelGameOver.SetActive(true);
+
+        if (barraAutoestima != null) barraAutoestima.value = autoestima;
+
+        if (textoResultado != null)
+            textoResultado.text = ganado ? mensajeVictoria : mensajeDerrota;
+
+        StartCoroutine(EsperarYPasarDeNivel());
     }
+
+    System.Collections.IEnumerator EsperarYPasarDeNivel()
+    {
+        yield return new WaitForSeconds(1f);    // Espera para que el jugador vea el resultado
+
+        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
+
+        if (endScript != null)
+        {
+            int puntuacionFinal = Mathf.RoundToInt(autoestima);
+            endScript.FinishMinigameWithScore(puntuacionFinal);
+        }
+        else
+        {
+            Debug.LogError("No se encontró el script MinigameEnd en la escena.");
+        }
+    }
+
+
 
     public void Reiniciar()
     {
