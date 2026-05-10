@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce29d82e61f44af3a1a9a290919d40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaBasura
-  prefabEfectoTranquilidad: {fileID: 7247377875866301059, guid: b0411fd1f1bef4ed1a6734d013a01bc1, type: 3}
+  prefabEfectoTranquilidad: {fileID: 7187556789643591075, guid: be2f62178a69343df8f4ae2ea21ed17c, type: 3}
   sonidoTranquilidad: {fileID: 8300000, guid: 7dd221341022c4e8883267fec1695857, type: 3}
 --- !u!114 &1606656794
 MonoBehaviour:
