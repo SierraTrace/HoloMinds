@@ -60,7 +60,16 @@ public class MinigameFlowController : MonoBehaviour
         foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
         {
             obstacle.enabled = false;
+
+            Collider2D col = obstacle.GetComponent<Collider2D>();
+            if (col != null)
+            {
+                col.enabled = false;
+                // col.isTrigger = true;
+            }
         }
+
+        
 
         ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
         if (spawner != null)
@@ -75,7 +84,8 @@ public class MinigameFlowController : MonoBehaviour
             var rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.simulated = false;
+                rb.simulated = true;
+                rb.constraints = RigidbodyConstraints2D.None;
             }
 
             if (type == EndType.Death)
