@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 782978031797660945}
   - component: {fileID: 333858101960498583}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: Obstacle Miss You
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 4451829565753247008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.3031, y: -1.5221, z: 0}
-  m_LocalScale: {x: 1.7277899, y: 2.0288, z: 1}
+  m_LocalPosition: {x: 12.3031, y: 0.8, z: 0}
+  m_LocalScale: {x: 1.7277899, y: 1.72779, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8594ab81cc2104247a61abe08246c272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa9d46f90cbebcc4bbb02427d60411ea, type: 3}
   m_Color: {r: 1, g: 0.9803922, b: 0.9803922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,17 +127,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.02375678, y: 0.023344696}
+  m_Offset: {x: 0.0022553205, y: 0.03739872}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.024, y: 1.536}
+    oldSize: {x: 1.536, y: 1.024}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.39694124, y: 0.9533106}
+  m_Size: {x: 0.7825253, y: 0.5136066}
   m_EdgeRadius: 0
 --- !u!114 &333858101960498583
 MonoBehaviour:
