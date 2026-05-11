@@ -653,7 +653,7 @@ MonoBehaviour:
   titleTargetPos: {x: 0, y: 100}
   descTargetPos: {x: 0, y: 0}
   levelTitle: SWIP-EX
-  levelDescription: "ELIMINA TODOS LOS MENSAJES T\xD3XICOS"
+  levelDescription: "LOS MENSAJES T\xD3XICOS A LA BASURA"
 --- !u!4 &742977488
 Transform:
   m_ObjectHideFlags: 0
