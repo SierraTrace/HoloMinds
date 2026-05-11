@@ -5,11 +5,15 @@ using System;
 
 public class PlayerJump : MonoBehaviour
 {
+
+    [Header("Configuración de Salto")]
     public float jumpForce = 20f;
+    public int maxJumps = 2;
+
+    private int _jumpsRemaining;
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private InputAction jumpAction;
-
     private Animator animator;             // Referencia al componente Animator para controlar las animaciones  
 
     public MinigameEnd endController;      // Referencia al script que maneja el fin del minijuego
@@ -31,6 +35,7 @@ public class PlayerJump : MonoBehaviour
     {
         animator.SetBool("isRun", true);    // Iniciamos corriendo
         animator.SetBool("isJump", false);
+        _jumpsRemaining = maxJumps;
     }
 
     private void OnEnable() => jumpAction.Enable();
@@ -39,12 +44,17 @@ public class PlayerJump : MonoBehaviour
 
     private void TryJump()
     {
-        if (isGrounded)
+        if (_jumpsRemaining > 0)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
+            _jumpsRemaining--;
+
             animator.SetBool("isRun", false);
             animator.SetBool("isJump", true);
+
+            // TODO: Verificar trayectorias de salto.
+
 
             if (AudioManager.Instance != null)            {
                 AudioManager.Instance.PlayJumpSound();
@@ -57,6 +67,7 @@ public class PlayerJump : MonoBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             isGrounded = true;
+            _jumpsRemaining = maxJumps;
 
             animator.SetBool("isRun", true);
             animator.SetBool("isJump", false);
