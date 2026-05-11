@@ -42,7 +42,7 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
             efecto.transform.localScale = Vector3.one;
 
             // Destruimos el efecto después de 1 segundo
-            Destroy(efecto, 1f);
+            Destroy(efecto, 0.5f);
         }
 
         // Sonido
