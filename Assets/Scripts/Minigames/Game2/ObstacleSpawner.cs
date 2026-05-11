@@ -2,16 +2,26 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    
-    public GameObject obstaclePrefab;
+    [Header("Pool de Obstáculos")]
+    public GameObject[] obstaclePrefabs;  // Array de prefabs para diferentes tipos de obstáculos
+
+    [Header("Configuración de Spawn")]
     public float minSpawnTime = 1f;
     public float maxSpawnTime = 3f;
 
 
     void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        if (obstaclePrefabs.Length > 0)
+        {
+            StartCoroutine(SpawnRoutine());
+        }
+        else
+        {
+            Debug.LogError("ObstacleSpawner: No hay prefabs asignados en el array");
+        }
     }
+
 
     private System.Collections.IEnumerator SpawnRoutine()
     {
@@ -19,8 +29,18 @@ public class ObstacleSpawner : MonoBehaviour
         {
             float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(waitTime);
-            Instantiate(obstaclePrefab, transform.position, Quaternion.identity);
+
+            if (ParallaxController.currentWorldSpeed > 0)
+            {
+                SpawnRandomObstacle();
+            }
         }
+    }
+
+    private void SpawnRandomObstacle()
+    {
+        int randomIndex = Random.Range(0, obstaclePrefabs.Length);
+        Instantiate(obstaclePrefabs[randomIndex], transform.position, Quaternion.identity);
     }
 
 }
