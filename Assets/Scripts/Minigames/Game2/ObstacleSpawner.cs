@@ -40,7 +40,16 @@ public class ObstacleSpawner : MonoBehaviour
     private void SpawnRandomObstacle()
     {
         int randomIndex = Random.Range(0, obstaclePrefabs.Length);
-        Instantiate(obstaclePrefabs[randomIndex], transform.position, Quaternion.identity);
+        GameObject selectedPrefab = obstaclePrefabs[randomIndex];
+
+        // Offset para controlar altura de los obstáculos
+        Vector3 spawnPos = new Vector3(
+            transform.position.x,
+            transform.position.y + selectedPrefab.transform.localPosition.y,
+            transform.position.z
+        );
+
+        Instantiate(selectedPrefab, spawnPos, Quaternion.identity);
     }
 
 }
