@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement; // Necesario si quieres forzar salto de escen
 
 public class GeneradorMensajes : MonoBehaviour
 {
+
+    //>Dani
+    public MinigameEnd minigameEndScript; // Referencia al script de fin de minijuego
+    //>Dani
+
     public GameObject prefabExNew;
     public GameObject prefabFamilia;
     public Transform puntoDeSpawn;
@@ -99,6 +104,22 @@ public class GeneradorMensajes : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // pausa
 
+
+        //>Dani: Enviamos la puntuación al script de fin de minijuego. Lo he asignado directamente en el inspector para evitar problemas de búsqueda.
+        if (minigameEndScript != null)
+        {
+            Debug.Log("Enviando puntuación: " + puntuacionActual);
+            minigameEndScript.FinishMinigameWithScore(puntuacionActual);
+        }
+        else
+        {
+            Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
+        }
+        //>Dani
+
+
+        //>Dani
+        /*
         MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
 
         if (endScript != null)
@@ -108,7 +129,8 @@ public class GeneradorMensajes : MonoBehaviour
         else
         {
             Debug.LogError("MinigameEnd no encontrado");
-        }
+        }*/
+        //>Dani
     }
 
     // Versión anterior

@@ -434,19 +434,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 326293645}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1653524705}
-        m_TargetAssemblyTypeName: MinigameEnd, Assembly-CSharp
-        m_MethodName: FinishMinigame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &326293645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c40543436fc84514b84427ae12372df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  minigameEndScript: {fileID: 1653524705}
   prefabExNew: {fileID: 2929264850485597898, guid: 0b185c903980a4089bdbdb07d0dd4684, type: 3}
   prefabFamilia: {fileID: 2929264850485597898, guid: eadc744e9b2ef4c14bc7eff11348847c, type: 3}
   puntoDeSpawn: {fileID: 915279518}
@@ -875,7 +864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 658.18, y: -123.3147}
+  m_AnchoredPosition: {x: 880, y: -140}
   m_SizeDelta: {x: 603.63, y: 718.5697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606656793
@@ -890,8 +879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce29d82e61f44af3a1a9a290919d40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaBasura
-  prefabEfectoTranquilidad: {fileID: 7187556789643591075, guid: be2f62178a69343df8f4ae2ea21ed17c, type: 3}
+  EfectoTranquilidad: {fileID: 0}
   sonidoTranquilidad: {fileID: 8300000, guid: 7dd221341022c4e8883267fec1695857, type: 3}
+  contenedorEfectos: {fileID: 0}
+  FlashVerde: {fileID: 0}
+  FlashRojo: {fileID: 0}
 --- !u!114 &1606656794
 MonoBehaviour:
   m_ObjectHideFlags: 0

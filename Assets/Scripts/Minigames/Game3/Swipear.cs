@@ -57,8 +57,11 @@ public class Swipear : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         {
             return;
         }
-        
-        
+
+        //>Dani     Si hacemos esto, el mensaje se destruye al soltarlo fuera de la papelera, lo que no es deseable.
+        //          Solo queremos destruirlo si se suelta dentro de la papelera, lo cual se maneja en ZonaBasura.cs
+
+        /*
         if (Mathf.Abs(transform.localPosition.x) > 300f)
         {
             
@@ -69,5 +72,7 @@ public class Swipear : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
             Destroy(gameObject);
         }
+        */
+        //<Dani
     }
 }

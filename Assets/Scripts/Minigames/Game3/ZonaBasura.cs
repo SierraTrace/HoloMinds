@@ -24,6 +24,14 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
         if(mensaje.CompareTag("MensajeRojo"))
         {
+            //>Dani     
+            GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
+            if (gen != null)
+            {
+                gen.SumarPunto();
+            }
+            //<Dani
+
             EjecutarFeedBack(mensaje);
             Debug.Log("Animaciones hechas");
         }
@@ -35,7 +43,13 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
     private void EjecutarFeedBack(GameObject mensaje)
     {
-        
+
+        //>Dani
+        GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
+        if (gen != null) gen.SumarPunto();
+        //<Dani
+
+
         if (EfectoTranquilidad != null)
         {
             // 1. Instanciamos la estrella DENTRO del contenedor visible, no en 'this.transform'
