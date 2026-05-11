@@ -13,6 +13,9 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     [Header("Efecto de pantalla")]
     public GameObject FlashVerde;
 
+    [Header("Efecto de pantalla")]
+    public GameObject FlashRojo;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
@@ -65,6 +68,10 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
     private void ColocarEnBasura(GameObject mensaje)
     {
+        if (FlashRojo != null)
+        {
+            StartCoroutine(EfectoPantallaRoja());
+        }
         // Simplemente destruimos el mensaje si no es el rojo
         Destroy(mensaje);
     }
@@ -89,6 +96,12 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     FlashVerde.SetActive(true); // Encendemos el panel verde
     yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
     FlashVerde.SetActive(false); // Lo apagamos
+}
+IEnumerator EfectoPantallaRoja()
+{
+    FlashRojo.SetActive(true); // Encendemos el panel rojo
+    yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
+    FlashRojo.SetActive(false); // Lo apagamos
 }
     
     
