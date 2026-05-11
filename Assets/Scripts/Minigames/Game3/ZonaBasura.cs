@@ -10,6 +10,9 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     public AudioClip sonidoTranquilidad; 
     public Transform contenedorEfectos; 
 
+    [Header("Efecto de pantalla")]
+    public GameObject FlashVerde;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
@@ -53,6 +56,11 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
         // Animación de desaparecer el mensaje
         StartCoroutine(AnimacionDesaparecer(mensaje));
+
+        if (FlashVerde != null)
+        {
+            StartCoroutine(EfectoPantallaVerde());
+        }
     }
 
     private void ColocarEnBasura(GameObject mensaje)
@@ -76,4 +84,12 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
         
         Destroy(obj); 
     }
+    IEnumerator EfectoPantallaVerde()
+{
+    FlashVerde.SetActive(true); // Encendemos el panel verde
+    yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
+    FlashVerde.SetActive(false); // Lo apagamos
+}
+    
+    
 }
