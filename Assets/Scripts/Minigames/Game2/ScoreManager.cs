@@ -18,6 +18,11 @@ public class ScoreManager : MonoBehaviour
     public Color warningcolor = Color.red;
     public float blinkInterval = 0.5f;
 
+    [Header("Dificultad Progresiva")]
+    public float speedMultiplier = 1.1f;
+    public float accelerationInterval = 10f;
+    private float _nextAccelerationTime;
+
     private float _currentDistance;
     private float _timer;
     private bool _isPaused = false;
@@ -32,6 +37,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         _timer = gameDuration;
+        _nextAccelerationTime = accelerationInterval;
 
         if (timerText != null)
         {
@@ -57,6 +63,15 @@ public class ScoreManager : MonoBehaviour
         if (_isPaused) return;
 
         _timer -= Time.deltaTime;
+
+        // Aumentar dificultad progresivamente
+        float timeElapsed = gameDuration - _timer;
+        if (timeElapsed >= _nextAccelerationTime)
+        {
+            IncreaseDifficulty();
+            _nextAccelerationTime += accelerationInterval;
+        }
+
 
         if (timerText != null)
         {
@@ -225,5 +240,18 @@ public class ScoreManager : MonoBehaviour
         anim.enabled = false;
     }
 
+    private void IncreaseDifficulty()
+    {
+        gameSpeed *= speedMultiplier;
+
+        ParallaxController parallx = FindObjectOfType<ParallaxController>();
+        if (parallx != null)
+        {
+            parallx.globalSpeed = gameSpeed / 5F;       // TODO: Mejorar esto para que no dependa de un valor fijo, Ajustar según escala base del juego
+        }
+
+        Debug.Log("Dificultad aumentada. Nueva velocidad: " + gameSpeed);
+
+    }
 
 }
