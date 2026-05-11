@@ -115,7 +115,7 @@ public class ScoreManager : MonoBehaviour
             player.DisableJumping();
 
             Animator anim = player.GetComponent<Animator>();
-            Rigidbody rb = player.GetComponent<Rigidbody>();
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
 
             if (anim != null) 
             {
@@ -167,6 +167,8 @@ public class ScoreManager : MonoBehaviour
     {
         while (_timer > 0 && !_isPaused)
         {
+            if (timerText == null) yield break;
+
             timerText.color = warningcolor;
 
             if (AudioManager.Instance != null)
@@ -180,7 +182,7 @@ public class ScoreManager : MonoBehaviour
             yield return new WaitForSeconds(blinkInterval);
         }
 
-        timerText.color = _originalColor;
+        if (timerText != null)timerText.color = _originalColor;
     }
 
 
@@ -222,60 +224,6 @@ public class ScoreManager : MonoBehaviour
 
         anim.enabled = false;
     }
-
-
-
-    /*
-    private void prepareVisualStop()
-    {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.StopBackgroundMusic();
-        }
-
-        ParallaxController parallax = FindObjectOfType<ParallaxController>();
-        if (parallax != null)
-        {
-            parallax.globalSpeed = 0f;
-        }
-
-        foreach (var obstacle in FindObjectsOfType<ObstacleMovement>())
-        {
-            obstacle.enabled = false;
-        }
-
-
-
-
-
-        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
-        if (spawner != null)
-        {
-            spawner.StopAllCoroutines();
-        }
-
-        PlayerJump player = FindObjectOfType<PlayerJump>();
-        if (player != null)
-        {
-            Animator anim = player.GetComponent<Animator>();
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-
-            if (anim != null)
-            {
-                anim.SetBool("isRun", false);
-                anim.SetBool("isJump", false);
-            }
-
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector2(0f, rb.linearVelocity.y);
-            }
-
-            player.enabled = false;
-
-        }
-
-    }*/
 
 
 }

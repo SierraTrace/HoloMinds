@@ -77,52 +77,6 @@ public class PlayerJump : MonoBehaviour
     }
 
 
-    /* // Secuencia refactorizada en MinigameFlowController
-    
-    private IEnumerator SequencceDie()
-    {
-        animator.SetBool("isRun", false);
-        animator.SetBool("isJump", false);
-        animator.SetTrigger("die");             // Activar la animación de muerte
-
-        // animator.Play("Die", -1, 0f);
-
-        jumpAction.Disable();                   // Desactivar el salto
-        this.enabled = false;                   // Desactivar este script para evitar más interacciones
-
-
-        if (ScoreManager.Instance != null)
-            ScoreManager.Instance.StopScore();
-
-        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
-        if (spawner != null)
-            spawner.StopAllCoroutines();        // Detener la generación de obstáculos
-
-        
-        ParallaxController parallax = FindObjectOfType<ParallaxController>();
-        if (parallax != null){
-            parallax.globalSpeed = 0;
-        }
-
-        // Delay
-        yield return new WaitForSeconds(1f);
-
-        int finalScore = ScoreManager.Instance != null ? ScoreManager.Instance.GetFinalScore() : 0;
-        if (endController != null)
-        {
-            endController.FinishMinigameWithScore(finalScore);
-        }
-        else
-        {
-            Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
-        }        
-
-        // rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
-        // rb.simulated = false;                    // Detener la física del jugador
-
-        
-    }
-    */
 
     private void OnCollisionExit2D(Collision2D collision)
     {
