@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640346475962747016, guid: 82139f5fb84f14f498a9746d48c45adc, type: 3}
       propertyPath: m_GravityScale
-      value: 5
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 8640346475962747018, guid: 82139f5fb84f14f498a9746d48c45adc, type: 3}
       propertyPath: m_Enabled
@@ -1814,8 +1814,9 @@ MonoBehaviour:
   - {fileID: 4451829565753247008, guid: ea4d1e8669995c241befcb3376c13044, type: 3}
   - {fileID: 4451829565753247008, guid: ea4d1e8669995c241befcb3376c13044, type: 3}
   - {fileID: 4451829565753247008, guid: 11b0d2f9fd8c3ee48aea42a6e1a10bf0, type: 3}
-  minSpawnTime: 0.6
-  maxSpawnTime: 1.5
+  - {fileID: 4451829565753247008, guid: ffaaac069aeda24418edd258b451a391, type: 3}
+  minSpawnTime: 0.7
+  maxSpawnTime: 1.4
 --- !u!1 &1206875558
 GameObject:
   m_ObjectHideFlags: 0
