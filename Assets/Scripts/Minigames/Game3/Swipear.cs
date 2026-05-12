@@ -21,7 +21,14 @@ public class Swipear : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
        
         if (!estaArrastrado && !estaBasura)
         {
-            transform.Translate(Vector3.down * velocidadCaida * Time.deltaTime);
+            //En lugar de usar 'velocidadCaida' (que es fija),
+            //le preguntamos al generador cuál es la velocidad global AHORA.
+            float vGlobal = (generadorPrincipal != null) ? generadorPrincipal.velocidadActual : 2f;
+
+            //Aplicamos el movimiento usando esa velocidad variable.
+            //He multiplicado por 150f porque la velocidad del generador suele ser un número bajo (2, 3, 4...)
+            //y para mover píxeles en el Canvas necesitamos números más grandes.
+            transform.Translate(Vector3.down * (vGlobal * 150f) * Time.deltaTime);
         }
 
         
@@ -57,22 +64,5 @@ public class Swipear : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         {
             return;
         }
-
-        //>Dani     Si hacemos esto, el mensaje se destruye al soltarlo fuera de la papelera, lo que no es deseable.
-        //          Solo queremos destruirlo si se suelta dentro de la papelera, lo cual se maneja en ZonaBasura.cs
-
-        /*
-        if (Mathf.Abs(transform.localPosition.x) > 300f)
-        {
-            
-            if (gameObject.CompareTag("MensajeRojo") && generadorPrincipal != null)
-            {
-                generadorPrincipal.SumarPunto();
-            }
-
-            Destroy(gameObject);
-        }
-        */
-        //<Dani
     }
 }

@@ -856,13 +856,17 @@ MonoBehaviour:
   prefabExNew: {fileID: 2929264850485597898, guid: 0b185c903980a4089bdbdb07d0dd4684, type: 3}
   prefabFamilia: {fileID: 2929264850485597898, guid: eadc744e9b2ef4c14bc7eff11348847c, type: 3}
   puntoDeSpawn: {fileID: 915279518}
-  tiempoEntreMensajes: 2
+  tiempoEntreMensajes: 1
   puntuacionActual: 0
-  limitePuntosVictoria: 10
+  limitePuntosVictoria: 100
   mensajesRojosEscapados: 0
-  limiteErrores: 3
+  limiteErrores: 10
   indiceDelMinijuego: 2
   objetoBotonFinalizar: {fileID: 326293642}
+  velocidadInicial: 2
+  velocidadActual: 0
+  incrementoVelocidad: 0.1
+  velocidadMaxima: 10
 --- !u!1 &1260405031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,8 +1056,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 642, y: -97}
-  m_SizeDelta: {x: 603.63, y: 718.5697}
+  m_AnchoredPosition: {x: 592.645, y: -100.61136}
+  m_SizeDelta: {x: 702.34, y: 725.7924}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606656793
 MonoBehaviour:

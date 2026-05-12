@@ -16,6 +16,8 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     [Header("Efecto de pantalla")]
     public GameObject FlashRojo;
 
+   
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
@@ -44,10 +46,10 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     private void EjecutarFeedBack(GameObject mensaje)
     {
 
-        //>Dani
+        //PUNTUACION SUPER IMPORTANTE NO BORRAR
         GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
         if (gen != null) gen.SumarPunto();
-        //<Dani
+        
 
 
         if (EfectoTranquilidad != null)

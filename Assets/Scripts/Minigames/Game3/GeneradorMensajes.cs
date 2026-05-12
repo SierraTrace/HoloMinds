@@ -24,12 +24,28 @@ public class GeneradorMensajes : MonoBehaviour
     public int indiceDelMinijuego = 2;    // Índice 2 corresponde al Minijuego 3 en el array
     public GameObject objetoBotonFinalizar;
 
+     [Header ("Dificultad")]
+    public float velocidadInicial = 2f;
+    public float velocidadActual;
+    public float incrementoVelocidad = 0.1f;
+    public float velocidadMaxima = 10f;
+
     private bool juegoTerminado = false;
+
+    
 
     void Start()
     {
         // Al empezar, activamos la rutina de spam
         StartCoroutine(SpamMensajes());
+        velocidadActual = velocidadInicial;
+    }
+    void Update()
+    {
+        if (velocidadActual < velocidadMaxima)
+        {
+            velocidadActual += incrementoVelocidad * Time.deltaTime;
+        }
     }
 
     IEnumerator SpamMensajes()
@@ -62,7 +78,7 @@ public class GeneradorMensajes : MonoBehaviour
         }
     }
 
-    // NUEVO: Método para sumar puntos al acertar
+    //Método para sumar puntos al acertar
     public void SumarPunto()
     {
         if (juegoTerminado) return;
@@ -105,7 +121,7 @@ public class GeneradorMensajes : MonoBehaviour
         yield return new WaitForSeconds(1f); // pausa
 
 
-        //>Dani: Enviamos la puntuación al script de fin de minijuego. Lo he asignado directamente en el inspector para evitar problemas de búsqueda.
+        //Enviamos la puntuación al script de fin de minijuego. Lo he asignado directamente en el inspector para evitar problemas de búsqueda.
         if (minigameEndScript != null)
         {
             Debug.Log("Enviando puntuación: " + puntuacionActual);
@@ -115,10 +131,10 @@ public class GeneradorMensajes : MonoBehaviour
         {
             Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
         }
-        //>Dani
+        
 
 
-        //>Dani
+        
         /*
         MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
 
@@ -130,7 +146,7 @@ public class GeneradorMensajes : MonoBehaviour
         {
             Debug.LogError("MinigameEnd no encontrado");
         }*/
-        //>Dani
+        
     }
 
     // Versión anterior
