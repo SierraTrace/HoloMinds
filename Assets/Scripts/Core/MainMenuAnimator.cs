@@ -36,6 +36,16 @@ public class MainMenuAnimator : MonoBehaviour
         PrepararEscena();
 
         StartCoroutine(SecuenciaAparicion());
+
+        Invoke("IniciarMusica", 0.1f);
+    }
+
+    private void IniciarMusica()
+    {
+        if (MenuAudioManager.Instance != null)
+        {
+            MenuAudioManager.Instance.FadeInMusica(duracionFade, 0.5f);
+        }
     }
 
 
@@ -101,6 +111,22 @@ public class MainMenuAnimator : MonoBehaviour
             yield return null;
         }
     }
-    
 
+
+    public void DesactivarBotones()
+    {
+        grupoBotones.interactable = false;
+        grupoBotones.blocksRaycasts = false;
+       
+        StartCoroutine(FadeBotonesSalida());
+    }
+
+    private IEnumerator FadeBotonesSalida()
+    {
+        while (grupoBotones.alpha > 0)
+        {
+            grupoBotones.alpha -= Time.deltaTime * 2f;
+            yield return null;
+        }
+    }
 }
