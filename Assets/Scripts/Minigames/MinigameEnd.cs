@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class MinigameEnd : MonoBehaviour
 {
-    public int minigameIndex;   // ï¿½ndice del minijuego actual, asignado en el Inspector
+    public int minigameIndex;   // Indice del minijuego actual, asignado en el Inspector
     public int testScore = 100; // TODO Puntuaciï¿½n de prueba para simular el resultado del minijuego
 
-    public void FinishMinigame()  // Método para finalizar el minijuego sin una puntuación real (usado para pruebas)
+    public void FinishMinigame()  // Mï¿½todo para finalizar el minijuego sin una puntuaciï¿½n real (usado para pruebas)
     {
 
         Debug.Log($"Minigame {minigameIndex} finished with score: {testScore}");
@@ -14,7 +14,7 @@ public class MinigameEnd : MonoBehaviour
         SceneLoader.LoadNextScene();
     }
 
-    public void FinishMinigameWithScore(int score) // Método para finalizar el minijuego con una puntuación real (usado en integración final)
+    public void FinishMinigameWithScore(int score) // Metodo para finalizar el minijuego con una puntuaciÃ³n real (usado en integraciÃ³n final)
     {
         Debug.Log($"Minigame {minigameIndex} finished with score: {score}");
         

@@ -1,14 +1,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerJump : MonoBehaviour
 {
+
+    [Header("Configuración de Salto")]
     public float jumpForce = 20f;
+    public int maxJumps = 2;
+
+    private int _jumpsRemaining;
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private InputAction jumpAction;
-
     private Animator animator;             // Referencia al componente Animator para controlar las animaciones  
 
     public MinigameEnd endController;      // Referencia al script que maneja el fin del minijuego
@@ -30,6 +35,7 @@ public class PlayerJump : MonoBehaviour
     {
         animator.SetBool("isRun", true);    // Iniciamos corriendo
         animator.SetBool("isJump", false);
+        _jumpsRemaining = maxJumps;
     }
 
     private void OnEnable() => jumpAction.Enable();
@@ -38,12 +44,21 @@ public class PlayerJump : MonoBehaviour
 
     private void TryJump()
     {
-        if (isGrounded)
+        if (_jumpsRemaining > 0)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
+            _jumpsRemaining--;
+
             animator.SetBool("isRun", false);
             animator.SetBool("isJump", true);
+
+            // TODO: Verificar trayectorias de salto.
+
+
+            if (AudioManager.Instance != null)            {
+                AudioManager.Instance.PlayJumpSound();
+            }
         }
     }
 
@@ -52,6 +67,7 @@ public class PlayerJump : MonoBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             isGrounded = true;
+            _jumpsRemaining = maxJumps;
 
             animator.SetBool("isRun", true);
             animator.SetBool("isJump", false);
@@ -65,52 +81,13 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleFinJuego()
     {
-        StartCoroutine(SequencceDie());
+        // StartCoroutine(SequencceDie());
+
+        int finalscore = ScoreManager.Instance.GetFinalScore();
+        MinigameFlowController.Instance.EndGame(finalscore, EndType.Death);
     }
 
-    private IEnumerator SequencceDie()
-    {
-        animator.SetBool("isRun", false);
-        animator.SetBool("isJump", false);
-        animator.SetTrigger("die");             // Activar la animación de muerte
 
-        // animator.Play("Die", -1, 0f);
-
-        jumpAction.Disable();                   // Desactivar el salto
-        this.enabled = false;                   // Desactivar este script para evitar más interacciones
-
-
-        if (ScoreManager.Instance != null)
-            ScoreManager.Instance.StopScore();
-
-        ObstacleSpawner spawner = FindObjectOfType<ObstacleSpawner>();
-        if (spawner != null)
-            spawner.StopAllCoroutines();        // Detener la generación de obstáculos
-
-        
-        ParallaxController parallax = FindObjectOfType<ParallaxController>();
-        if (parallax != null){
-            parallax.globalSpeed = 0;
-        }
-
-        // Delay
-        yield return new WaitForSeconds(1f);
-
-        int finalScore = ScoreManager.Instance != null ? ScoreManager.Instance.GetFinalScore() : 0;
-        if (endController != null)
-        {
-            endController.FinishMinigameWithScore(finalScore);
-        }
-        else
-        {
-            Debug.LogError("No se ha asignado el EndController al script PlayerJump.");
-        }        
-
-        // rb.linearVelocity = Vector2.zero;        // Detener el movimiento del jugador
-        // rb.simulated = false;                    // Detener la física del jugador
-
-        
-    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -124,5 +101,10 @@ public class PlayerJump : MonoBehaviour
     {
         // jumpAction.Disable();
         jumpAction.Dispose();
+    }
+
+    public void DisableJumping()
+    {
+        jumpAction.Disable();
     }
 }

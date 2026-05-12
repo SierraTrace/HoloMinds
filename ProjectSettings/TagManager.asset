@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - UI
   - 
   - 
   - 
@@ -41,6 +41,36 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 2781646475
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 648915111
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 795161839
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2889932245
+    locked: 0
+  - name: UI
+    uniqueID: 1643119973
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 1792880321
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 2121361875
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 1551590469
+    locked: 0
+  - name: New Layer 9
+    uniqueID: 3432035655
+    locked: 0
+  - name: UI
+    uniqueID: 1248124741
     locked: 0
   m_RenderingLayers:
   - Default

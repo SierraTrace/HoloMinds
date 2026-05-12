@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu juego
 {
@@ -27,7 +28,26 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
     public AudioClip sonidoAcierto;
     public AudioClip sonidoFallo;
     [SerializeField] private AudioSource fuenteAudio;
+    public static ScoreManager Instance;    // Singleton instance
 
+    [Header("Configuration")]
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
+    public float gameSpeed = 5f;
+    public float gameDuration = 30f;        // Duraci�n total del minijuego
+    public BonusAnimator bonusAnimator;
+    public Transform scoreTargetPosition;
+    [Tooltip("Wire in editor if possible.")]
+    public MinigameEnd end = null;
+
+    [Header("Feedback Visual")]
+    public Color warningcolor = Color.red;
+    public float blinkInterval = 0.5f;
+
+    private float _timer;
+    private bool _isPaused = false;
+    private bool _isWarningActive = false;
+    private Color _originalColor;
     void Awake()
     {
         // Configuramos tu propia instancia
@@ -43,7 +63,23 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
             fuenteAudio.playOnAwake = false;
         }
     }
+    private void Start()
+    {
+        _timer = gameDuration;
 
+        if (timerText != null)
+        {
+            _originalColor = timerText.color;
+        }
+
+        //float maxScore = gameSpeed * gameDuration;
+
+        // Establecer el valor m�ximo en la barra de autoestima
+        //if (SelfEsteemBar.Instance != null)
+        //{
+        //    SelfEsteemBar.Instance.SetMaxValue(maxScore);
+        //}
+    }
     void Update()
     {
         if (barraAutoestima != null)
@@ -58,7 +94,38 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
             textoTimer.text = Mathf.Ceil(tiempoRestante).ToString();
 
         if (tiempoRestante <= 0) FinDelJuego(autoestima >= 5);
+
+        if (_isPaused) return;
+
+        _timer -= Time.deltaTime;
+
+        if (timerText != null)
+        {
+            int seconds = Mathf.CeilToInt(_timer);
+            timerText.text = seconds.ToString() + 's';
+        }
+
+        if (_timer <= 5f && !_isWarningActive)
+        {
+            _isWarningActive = true;
+            StartCoroutine(BlinkTimerRoutine());
+        }
+
+
+        UpdateScoreUI();
+
     }
+
+    private void UpdateScoreUI()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = (autoestima * 10).ToString() + " pts";
+        }
+        barraAutoestima.value = autoestima;
+        barraAutoestima.Rebuild(CanvasUpdate.PreRender);
+    }
+
 
     public void ModificarAutoestima(int cantidad)
     {
@@ -80,6 +147,27 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
         cerebroRenderer.color = colorEfecto;
         yield return new WaitForSeconds(0.5f);
         cerebroRenderer.color = Color.white;
+    }
+
+
+    private IEnumerator BlinkTimerRoutine()
+    {
+        while (_timer > 0 && !_isPaused)
+        {
+            timerText.color = warningcolor;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayTimerWarning();
+            }
+
+            yield return new WaitForSeconds(blinkInterval);
+
+            timerText.color = _originalColor;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        timerText.color = _originalColor;
     }
 
     // Metodo de cambio de escena con botón, para pruebas
@@ -128,16 +216,34 @@ public class GameManagerAutoestima : MonoBehaviour // Nombre ÚNICO para tu jueg
     {
         yield return new WaitForSeconds(1f);    // Espera para que el jugador vea el resultado
 
-        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
+        // MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
 
-        if (endScript != null)
+        //if (end != null)
+        ////    int puntuacionFinal = Mathf.RoundToInt(autoestima);
+        //   end.FinishMinigameWithScore(puntuacionFinal);
+        //}
+        //else
+        //{
+        Debug.LogError("No se encontró el script MinigameEnd en la escena.");
+        //  }
+
+        SendFinalScore();
+    }
+
+    private void SendFinalScore()
+    {
+        int finalScore = (int)(autoestima * 10); // Convertimos la autoestima a una puntuación (ejemplo: 0-10 -> 0-100)  
+        Debug.Log($"Puntuación final de {finalScore} enviada al MinigameEnd.");
+        if (end == null)
         {
-            int puntuacionFinal = Mathf.RoundToInt(autoestima);
-            endScript.FinishMinigameWithScore(puntuacionFinal);
+            end = FindObjectOfType<MinigameEnd>();
+            Debug.LogWarning("MinigameEnd no asignado en el inspector, buscando en la escena...");
         }
-        else
+
+        if (end != null)
         {
-            Debug.LogError("No se encontró el script MinigameEnd en la escena.");
+            end.FinishMinigameWithScore(finalScore);
+            Debug.Log("Puntuación enviada al MinigameEnd.");
         }
     }
 

@@ -4,7 +4,12 @@ using UnityEngine.SceneManagement; // Necesario si quieres forzar salto de escen
 
 public class GeneradorMensajes : MonoBehaviour
 {
-    public GameObject prefabEx;
+
+    //>Dani
+    public MinigameEnd minigameEndScript; // Referencia al script de fin de minijuego
+    //>Dani
+
+    public GameObject prefabExNew;
     public GameObject prefabFamilia;
     public Transform puntoDeSpawn;
     public float tiempoEntreMensajes = 2f;
@@ -34,7 +39,7 @@ public class GeneradorMensajes : MonoBehaviour
             yield return new WaitForSeconds(tiempoEntreMensajes);
             
             
-            GameObject prefabAElegir = (Random.value > 0.5f) ? prefabEx : prefabFamilia;
+            GameObject prefabAElegir = (Random.value > 0.5f) ? prefabExNew : prefabFamilia;
             
             
             GameObject nuevoMensaje = Instantiate(prefabAElegir, GameObject.Find("Canvas").transform);
@@ -43,7 +48,7 @@ public class GeneradorMensajes : MonoBehaviour
             nuevoMensaje.GetComponent<RectTransform>().anchoredPosition = puntoDeSpawn.GetComponent<RectTransform>().anchoredPosition;
             
            
-            if (prefabAElegir == prefabEx)
+            if (prefabAElegir == prefabExNew)
             {
                 nuevoMensaje.tag = "MensajeRojo";
             }
@@ -99,6 +104,22 @@ public class GeneradorMensajes : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // pausa
 
+
+        //>Dani: Enviamos la puntuación al script de fin de minijuego. Lo he asignado directamente en el inspector para evitar problemas de búsqueda.
+        if (minigameEndScript != null)
+        {
+            Debug.Log("Enviando puntuación: " + puntuacionActual);
+            minigameEndScript.FinishMinigameWithScore(puntuacionActual);
+        }
+        else
+        {
+            Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
+        }
+        //>Dani
+
+
+        //>Dani
+        /*
         MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
 
         if (endScript != null)
@@ -108,7 +129,8 @@ public class GeneradorMensajes : MonoBehaviour
         else
         {
             Debug.LogError("MinigameEnd no encontrado");
-        }
+        }*/
+        //>Dani
     }
 
     // Versión anterior
