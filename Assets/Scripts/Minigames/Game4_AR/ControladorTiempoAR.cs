@@ -3,7 +3,7 @@ using TMPro;
 
 public class ControladorTiempoAR : MonoBehaviour
 {
-    public float tiempoRestante = 30f;
+    public float tiempoRestante = 60f;
     public TextMeshProUGUI textoTemporizador; 
                
     
@@ -46,8 +46,7 @@ public class ControladorTiempoAR : MonoBehaviour
         // 3. PASAMOS LOS PUNTOS AL SCRIPT DE DANI
         if (scriptInteraccion != null && scriptFinalCompas != null)
         {
-            scriptFinalCompas.testScore = scriptInteraccion.puntosLocales;
-           SceneLoader.LoadNextScene();
+            scriptFinalCompas.FinishMinigameWithScore(scriptInteraccion.puntosLocales);
         }
     }
 }

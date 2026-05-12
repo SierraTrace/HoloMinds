@@ -1,14 +1,17 @@
 using UnityEngine;
-using UnityEngine.InputSystem; 
-using UnityEngine.UI; 
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class InteraccionAR : MonoBehaviour
 {
-    [HideInInspector] public int puntosLocales = 0; 
+    [HideInInspector] public int puntosLocales = 0;
 
     [Header("Interfaz")]
-    public Slider barraPuntos; 
-    public int puntosMaximos = 10; 
+    public Slider barraPuntos;
+    public TextMeshProUGUI textoScore;
+    public int puntosMaximos = 100;
+    public int puntosPorObjeto = 10;
 
     [Header("Efectos Visuales")]
     public GameObject prefabParticulasBuenas;
@@ -39,31 +42,31 @@ public class InteraccionAR : MonoBehaviour
                 {
                     if (objetoTocado.debeElimibarse)
                     {
-                        puntosLocales += objetoTocado.valorPuntos;
-                        
-                        
+                        puntosLocales += puntosPorObjeto;
+
                         if (puntosLocales >= puntosMaximos)
                         {
                             ControladorTiempoAR timer = FindFirstObjectByType<ControladorTiempoAR>();
                             if (timer != null) timer.TerminarMicrojuego();
                         }
 
-                        if (prefabParticulasBuenas != null) 
+                        if (prefabParticulasBuenas != null)
                             Instantiate(prefabParticulasBuenas, hit.transform.position, Quaternion.identity);
                     }
                     else
                     {
-                        puntosLocales -= objetoTocado.valorPuntos;
-                        if (puntosLocales < 0) puntosLocales = 0; 
-                        
-                        if (prefabParticulasMalas != null) 
+                        puntosLocales -= puntosPorObjeto;
+                        if (puntosLocales < 0) puntosLocales = 0;
+
+                        if (prefabParticulasMalas != null)
                             Instantiate(prefabParticulasMalas, hit.transform.position, Quaternion.identity);
                     }
 
                     if (barraPuntos != null) barraPuntos.value = puntosLocales;
+                    if (textoScore != null) textoScore.text = puntosLocales.ToString();
 
                     Destroy(hit.transform.gameObject);
-                    break; 
+                    break;
                 }
             }
         }

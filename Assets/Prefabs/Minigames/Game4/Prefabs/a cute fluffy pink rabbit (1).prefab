@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjetoAR
   debeElimibarse: 1
   valorPuntos: 1
+  tiempoVida: 2
 --- !u!65 &4549430819319369345
 BoxCollider:
   m_ObjectHideFlags: 0
