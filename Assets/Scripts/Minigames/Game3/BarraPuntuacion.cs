@@ -26,7 +26,7 @@ public class BarraPuntuacion : MonoBehaviour
 
         if (scoreText != null)
         {
-            scoreText.text = Mathf.FloorToInt(value).ToString();
+            scoreText.text = Mathf.FloorToInt(value).ToString() + " pts";
         }
     }
 }
