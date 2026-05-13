@@ -10,14 +10,14 @@ public class TransitionManager : MonoBehaviour
     public RectTransform descriptionText;
     public RectTransform countdownText;
 
-    [Header("Configuración de animación")]
+    [Header("Configuraciï¿½n de animaciï¿½n")]
     public float animationDuration = 1f;
     public Vector2 titleTargetPos = new Vector2(0, 100);
     public Vector2 descTargetPos = new Vector2(0, 0);
 
     [Header("Textos del Nivel")]
     public string levelTitle = "MINIJUEGO X";
-    public string levelDescription = "¡ATRAPA TODOS LOS CORAZONES ROTOS!";
+    public string levelDescription = "ATRAPA TODOS LOS CORAZONES ROTOS";
     
 
     void Start()
@@ -42,7 +42,7 @@ public class TransitionManager : MonoBehaviour
         float elapsed = 0f;
         
 
-        // Animar el título y la descripción hacia sus posiciones objetivo
+        // Animar el tï¿½tulo y la descripciï¿½n hacia sus posiciones objetivo
         while (elapsed < animationDuration)
         {
 
@@ -64,7 +64,7 @@ public class TransitionManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        // Cuenta atrás
+        // Cuenta atrï¿½s
         int remainingTime = 5;
         while (remainingTime > 0)
         {
@@ -80,7 +80,7 @@ public class TransitionManager : MonoBehaviour
             remainingTime--;
         }
 
-        countdownText.GetComponent<TextMeshProUGUI>().text = "¡GO!";
+        countdownText.GetComponent<TextMeshProUGUI>().text = "GO!";
         countdownText.localScale = Vector3.one * 2f;
 
         if (TransitionAudioManager.Instance != null)
