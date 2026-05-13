@@ -16,7 +16,7 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     [Header("Efecto de pantalla")]
     public GameObject FlashRojo;
 
-   
+   private CameraShaker shaker;
 
     public void OnDrop(PointerEventData eventData)
     {

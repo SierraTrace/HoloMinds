@@ -141,48 +141,6 @@ public class GeneradorMensajes : MonoBehaviour
             Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
         }
         
-
-
-        
-        /*
-        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
-
-        if (endScript != null)
-        {
-            endScript.FinishMinigameWithScore(puntuacionActual);
-        }
-        else
-        {
-            Debug.LogError("MinigameEnd no encontrado");
-        }*/
-        
     }
 
-    // Versión anterior
-    /*public void FinalizarJuego(bool esVictoria)
-    {
-        juegoTerminado = true;
-        StopAllCoroutines(); 
-
-       
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddScore(indiceDelMinijuego, puntuacionActual);
-            Debug.Log($"Guardando {puntuacionActual} puntos en el nivel {indiceDelMinijuego} del GameManager.");
-        }
-        else
-        {
-            Debug.LogWarning("No se ha encontrado el GameManager.Instance en la escena.");
-        }
-
-        // Acciones visuales del fin de juego
-        if (objetoBotonFinalizar != null)
-        {
-            objetoBotonFinalizar.SetActive(true);
-        }
-
-       
-        if (esVictoria) SceneManager.LoadScene("Game4_AR"); 
-        
-    }*/
 }
