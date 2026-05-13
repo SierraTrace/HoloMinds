@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - MensajeRojo
+  - Ground
+  - Obstacle
+  - MensajeFamilia
   layers:
   - Default
   - TransparentFX

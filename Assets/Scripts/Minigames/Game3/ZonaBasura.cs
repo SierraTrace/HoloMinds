@@ -18,6 +18,9 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
    private CameraShaker shaker;
 
+   [Header("Configuración para Familia")]
+    public AudioClip error; 
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
@@ -86,6 +89,11 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     {
         if (mensaje.CompareTag("MensajeFamilia") || !mensaje.CompareTag("MensajeRojo"))
         {
+            // Sonido
+            if (error!= null)
+            {
+            AudioSource.PlayClipAtPoint(error, Camera.main.transform.position);
+            }
             if (FlashRojo != null) StartCoroutine(EfectoPantallaRoja());
             if (shaker != null) shaker.Shake(0.2f, 0.4f);
 

@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 961739752}
   - component: {fileID: 961739751}
   - component: {fileID: 961739750}
+  - component: {fileID: 961739754}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -769,6 +770,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &961739754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961739749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109bc392a84e040d4b824c39b2897801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShaker
 --- !u!1 &1083754613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1089,7 @@ MonoBehaviour:
   contenedorEfectos: {fileID: 1083754614}
   FlashVerde: {fileID: 745296747}
   FlashRojo: {fileID: 1260405031}
+  error: {fileID: 8300000, guid: a68439bf7ec524af5ac7dbe49c4fdf30, type: 3}
 --- !u!114 &1606656794
 MonoBehaviour:
   m_ObjectHideFlags: 0
