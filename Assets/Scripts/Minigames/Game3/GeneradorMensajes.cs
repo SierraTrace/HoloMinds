@@ -31,14 +31,15 @@ public class GeneradorMensajes : MonoBehaviour
     public float velocidadMaxima = 10f;
 
     private bool juegoTerminado = false;
-
-    
+    private CameraShaker shaker;
 
     void Start()
     {
         // Al empezar, activamos la rutina de spam
         StartCoroutine(SpamMensajes());
         velocidadActual = velocidadInicial;
+        //Buscamos el script en la cámara al empezar
+        shaker = Camera.main.GetComponent<CameraShaker>();
     }
     void Update()
     {
@@ -98,6 +99,14 @@ public class GeneradorMensajes : MonoBehaviour
         if (juegoTerminado) return;
 
         mensajesRojosEscapados++;
+
+        //A TEMBLAR
+        //(Duración: 0.2 segunfos, Fuerza: 0.3)
+        if (shaker != null)
+        {
+            shaker.Shake(0.2f, 0.3f);
+        }
+        
         Debug.Log("Errores: " + mensajesRojosEscapados);
 
         // Comprobamos la derrota
