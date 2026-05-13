@@ -16,7 +16,10 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
     [Header("Efecto de pantalla")]
     public GameObject FlashRojo;
 
-   
+   private CameraShaker shaker;
+
+   [Header("Configuración para Familia")]
+    public AudioClip error; 
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -84,10 +87,32 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
     private void ColocarEnBasura(GameObject mensaje)
     {
-        if (FlashRojo != null)
+        if (mensaje.CompareTag("MensajeFamilia") || !mensaje.CompareTag("MensajeRojo"))
         {
-            StartCoroutine(EfectoPantallaRoja());
+            // Sonido
+            if (error!= null)
+            {
+            AudioSource.PlayClipAtPoint(error, Camera.main.transform.position);
+            }
+            if (FlashRojo != null) StartCoroutine(EfectoPantallaRoja());
+            if (shaker != null) shaker.Shake(0.2f, 0.4f);
+
+            //Registramos el error en el generador para restar autoestima
+            GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
+
+            if (gen != null) gen.RegistrarError();
+
+            Debug.Log("¡Error! Has tirado a la familia.");
         }
+        else
+        {
+            Debug.Log("¡Bien! Ex eliminado.");
+
+            // Si queremos que el acierto de la basura sume puntos
+            GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
+            if (gen != null) gen.SumarPunto();
+        }
+
         // Simplemente destruimos el mensaje si no es el rojo
         Destroy(mensaje);
     }
@@ -108,17 +133,17 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
         Destroy(obj); 
     }
     IEnumerator EfectoPantallaVerde()
-{
+    {
     FlashVerde.SetActive(true); // Encendemos el panel verde
     yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
     FlashVerde.SetActive(false); // Lo apagamos
-}
-IEnumerator EfectoPantallaRoja()
-{
+    }
+    IEnumerator EfectoPantallaRoja()
+    {
     FlashRojo.SetActive(true); // Encendemos el panel rojo
     yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
     FlashRojo.SetActive(false); // Lo apagamos
-}
-    
+    }
+
     
 }

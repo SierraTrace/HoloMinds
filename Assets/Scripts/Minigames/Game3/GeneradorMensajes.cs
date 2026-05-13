@@ -31,14 +31,15 @@ public class GeneradorMensajes : MonoBehaviour
     public float velocidadMaxima = 10f;
 
     private bool juegoTerminado = false;
-
-    
+    private CameraShaker shaker;
 
     void Start()
     {
         // Al empezar, activamos la rutina de spam
         StartCoroutine(SpamMensajes());
         velocidadActual = velocidadInicial;
+        //Buscamos el script en la cámara al empezar
+        shaker = Camera.main.GetComponent<CameraShaker>();
     }
     void Update()
     {
@@ -98,6 +99,14 @@ public class GeneradorMensajes : MonoBehaviour
         if (juegoTerminado) return;
 
         mensajesRojosEscapados++;
+
+        //A TEMBLAR
+        //(Duración: 0.2 segunfos, Fuerza: 0.3)
+        if (shaker != null)
+        {
+            shaker.Shake(0.2f, 0.3f);
+        }
+        
         Debug.Log("Errores: " + mensajesRojosEscapados);
 
         // Comprobamos la derrota
@@ -132,48 +141,6 @@ public class GeneradorMensajes : MonoBehaviour
             Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
         }
         
-
-
-        
-        /*
-        MinigameEnd endScript = Object.FindFirstObjectByType<MinigameEnd>();
-
-        if (endScript != null)
-        {
-            endScript.FinishMinigameWithScore(puntuacionActual);
-        }
-        else
-        {
-            Debug.LogError("MinigameEnd no encontrado");
-        }*/
-        
     }
 
-    // Versión anterior
-    /*public void FinalizarJuego(bool esVictoria)
-    {
-        juegoTerminado = true;
-        StopAllCoroutines(); 
-
-       
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddScore(indiceDelMinijuego, puntuacionActual);
-            Debug.Log($"Guardando {puntuacionActual} puntos en el nivel {indiceDelMinijuego} del GameManager.");
-        }
-        else
-        {
-            Debug.LogWarning("No se ha encontrado el GameManager.Instance en la escena.");
-        }
-
-        // Acciones visuales del fin de juego
-        if (objetoBotonFinalizar != null)
-        {
-            objetoBotonFinalizar.SetActive(true);
-        }
-
-       
-        if (esVictoria) SceneManager.LoadScene("Game4_AR"); 
-        
-    }*/
 }
