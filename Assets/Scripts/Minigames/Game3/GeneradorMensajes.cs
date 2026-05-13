@@ -15,10 +15,10 @@ public class GeneradorMensajes : MonoBehaviour
     public float tiempoEntreMensajes = 2f;
     
     [Header("Sistema de Puntuación")]
-    public int puntuacionActual = 0;
+    public int puntuacionActual = 30;
     public int limitePuntosVictoria = 100; // Puntos para ganar
     public int mensajesRojosEscapados = 0;
-    public int limiteErrores = 10;         // Máximo de fallos permitidos
+    public int limiteErrores = 100;         // Máximo de fallos permitidos
     
     [Header("Conexión con GameManager")]
     public int indiceDelMinijuego = 2;    // Índice 2 corresponde al Minijuego 3 en el array
