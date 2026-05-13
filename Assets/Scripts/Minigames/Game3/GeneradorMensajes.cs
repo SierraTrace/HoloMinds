@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement; // Necesario si quieres forzar salto de escen
 public class GeneradorMensajes : MonoBehaviour
 {
 
-    //>Dani
+    //
     public MinigameEnd minigameEndScript; // Referencia al script de fin de minijuego
-    //>Dani
+    //
 
     public GameObject prefabExNew;
     public GameObject prefabFamilia;
