@@ -16,9 +16,9 @@ public class GeneradorMensajes : MonoBehaviour
     
     [Header("Sistema de Puntuación")]
     public int puntuacionActual = 0;
-    public int limitePuntosVictoria = 10; // Puntos para ganar
+    public int limitePuntosVictoria = 100; // Puntos para ganar
     public int mensajesRojosEscapados = 0;
-    public int limiteErrores = 3;         // Máximo de fallos permitidos
+    public int limiteErrores = 10;         // Máximo de fallos permitidos
     
     [Header("Conexión con GameManager")]
     public int indiceDelMinijuego = 2;    // Índice 2 corresponde al Minijuego 3 en el array
@@ -40,6 +40,12 @@ public class GeneradorMensajes : MonoBehaviour
         velocidadActual = velocidadInicial;
         //Buscamos el script en la cámara al empezar
         shaker = Camera.main.GetComponent<CameraShaker>();
+
+        if (BarraPuntuacion.Instance != null)
+        {
+            BarraPuntuacion.Instance.SetMaxValue(limitePuntosVictoria);
+            BarraPuntuacion.Instance.SetValue(30); // Como empieza
+        }
     }
     void Update()
     {
@@ -84,7 +90,13 @@ public class GeneradorMensajes : MonoBehaviour
     {
         if (juegoTerminado) return;
 
-        puntuacionActual++;
+        puntuacionActual += 10;
+        Debug.Log("Puntos: " + puntuacionActual);
+
+        if (BarraPuntuacion.Instance != null)
+        {
+            BarraPuntuacion.Instance.SetValue(puntuacionActual);
+        }
         Debug.Log("Puntos: " + puntuacionActual);
 
         // Comprobamos la victoria
@@ -108,6 +120,9 @@ public class GeneradorMensajes : MonoBehaviour
         }
         
         Debug.Log("Errores: " + mensajesRojosEscapados);
+
+        puntuacionActual = Mathf.Max(0, puntuacionActual - 10); 
+        if (BarraPuntuacion.Instance != null) BarraPuntuacion.Instance.SetValue(puntuacionActual);
 
         // Comprobamos la derrota
         if(mensajesRojosEscapados >= limiteErrores)
