@@ -1382,7 +1382,7 @@ MonoBehaviour:
   puntuacionActual: 30
   limitePuntosVictoria: 100
   mensajesRojosEscapados: 0
-  limiteErrores: 100
+  limiteErrores: 5
   indiceDelMinijuego: 2
   objetoBotonFinalizar: {fileID: 326293642}
   velocidadInicial: 2

@@ -12,7 +12,7 @@ public class GeneradorMensajes : MonoBehaviour
     public GameObject prefabExNew;
     public GameObject prefabFamilia;
     public Transform puntoDeSpawn;
-    public float tiempoEntreMensajes = 2f;
+    public float tiempoEntreMensajes = 0.5f;
     
     [Header("Sistema de Puntuación")]
     public int puntuacionActual = 30;
@@ -27,8 +27,8 @@ public class GeneradorMensajes : MonoBehaviour
      [Header ("Dificultad")]
     public float velocidadInicial = 2f;
     public float velocidadActual;
-    public float incrementoVelocidad = 0.1f;
-    public float velocidadMaxima = 10f;
+    public float incrementoVelocidad = 0.5f;
+    public float velocidadMaxima = 15f;
 
     [Header("Efecto de pantalla")]
     public GameObject FlashRojo;
