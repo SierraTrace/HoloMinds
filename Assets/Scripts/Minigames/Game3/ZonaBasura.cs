@@ -29,13 +29,13 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
 
         if(mensaje.CompareTag("MensajeRojo"))
         {
-            //>Dani     
+            //    
             GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
             if (gen != null)
             {
                 gen.SumarPunto();
             }
-            //<Dani
+            //
 
             EjecutarFeedBack(mensaje);
             Debug.Log("Animaciones hechas");
@@ -92,11 +92,15 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
             // Sonido
             if (error!= null)
             {
+            StartCoroutine(AnimacionDesaparecer(mensaje));
+
             AudioSource.PlayClipAtPoint(error, Camera.main.transform.position);
             }
             if (FlashRojo != null) StartCoroutine(EfectoPantallaRoja());
             if (shaker != null) shaker.Shake(0.2f, 0.4f);
 
+            // Animación de desaparecer el mensaje
+            
             //Registramos el error en el generador para restar autoestima
             GeneradorMensajes gen = Object.FindFirstObjectByType<GeneradorMensajes>();
 
@@ -114,7 +118,7 @@ public class ZonaBasura : MonoBehaviour, IDropHandler
         }
 
         // Simplemente destruimos el mensaje si no es el rojo
-        Destroy(mensaje);
+        //Destroy(mensaje);
     }
 
     private IEnumerator AnimacionDesaparecer(GameObject obj)
