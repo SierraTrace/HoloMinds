@@ -16,7 +16,7 @@ public class GeneradorMensajes : MonoBehaviour
     
     [Header("Sistema de Puntuación")]
     public int puntuacionActual = 30;
-    public int limitePuntosVictoria = 100; // Puntos para ganar
+    public int limitePuntosVictoria = 500; // Puntos para ganar
     public int mensajesRojosEscapados = 0;
     public int limiteErrores = 100;         // Máximo de fallos permitidos
     
@@ -103,10 +103,10 @@ public class GeneradorMensajes : MonoBehaviour
         Debug.Log("Puntos: " + puntuacionActual);
 
         // Comprobamos la victoria
-        if (puntuacionActual >= limitePuntosVictoria)
+        /*if (puntuacionActual >= limitePuntosVictoria)
         {
             FinalizarJuego(true);
-        }
+        }*/
     }
 
     public void RegistrarError()
