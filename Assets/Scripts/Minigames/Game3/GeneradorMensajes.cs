@@ -30,6 +30,9 @@ public class GeneradorMensajes : MonoBehaviour
     public float incrementoVelocidad = 0.1f;
     public float velocidadMaxima = 10f;
 
+    [Header("Efecto de pantalla")]
+    public GameObject FlashRojo;
+
     private bool juegoTerminado = false;
     private CameraShaker shaker;
 
@@ -112,6 +115,11 @@ public class GeneradorMensajes : MonoBehaviour
 
         mensajesRojosEscapados++;
 
+        if(FlashRojo != null)
+        {
+            StartCoroutine(EfectoPantallaRoja());
+        }
+
         //A TEMBLAR
         //(Duración: 0.2 segunfos, Fuerza: 0.3)
         if (shaker != null)
@@ -156,6 +164,12 @@ public class GeneradorMensajes : MonoBehaviour
             Debug.LogError("GeneradorMensajes:MinigameEnd no asignado en el inspector");
         }
         
+    }
+    IEnumerator EfectoPantallaRoja()
+    {
+        FlashRojo.SetActive(true); // Encendemos el panel rojo
+        yield return new WaitForSeconds(0.2f); // Lo dejamos encendido un instante
+        FlashRojo.SetActive(false); // Lo apagamos
     }
 
 }

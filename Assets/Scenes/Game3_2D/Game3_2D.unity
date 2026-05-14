@@ -1389,6 +1389,7 @@ MonoBehaviour:
   velocidadActual: 0
   incrementoVelocidad: 0.1
   velocidadMaxima: 10
+  FlashRojo: {fileID: 1260405031}
 --- !u!1 &1260405031
 GameObject:
   m_ObjectHideFlags: 0
