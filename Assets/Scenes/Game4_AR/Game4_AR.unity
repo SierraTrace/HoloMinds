@@ -389,8 +389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11594bb76b7a9ad4881e82d1d6d7979c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControladorTiempoAR
-  tiempoRestante: 45
+  tiempoRestante: 40
   textoTemporizador: {fileID: 1580265411}
+  tiempoAviso: 10
+  colorAviso: {r: 1, g: 0, b: 0, a: 1}
+  intervaloParpadeo: 0.5
 --- !u!4 &440530190
 Transform:
   m_ObjectHideFlags: 0
