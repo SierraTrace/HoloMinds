@@ -9,11 +9,19 @@ public class GeneradorMensajes : MonoBehaviour
     public MinigameEnd minigameEndScript; // Referencia al script de fin de minijuego
     //
 
-    public GameObject prefabExNew;
-    public GameObject prefabFamilia;
-    public Transform puntoDeSpawn;
-    public float tiempoEntreMensajes = 0.5f;
+    [Header("Mensajes del Ex")]
+    public GameObject[] prefabsEx;
+
+    [Header("Mensajes de Familia")]
+    public GameObject[] prefabsFamilia;
     
+    public Transform puntoDeSpawn;
+
+   [Header("Ritmo de Mensajes")]
+    public float tiempoEntreMensajesInicial = 0.5f; 
+    private float tiempoEntreMensajesActual;
+    public float tiempoMinimoEntreMensajes = 0.2f; // El tope de rapidez de spawn
+
     [Header("Sistema de Puntuación")]
     public int puntuacionActual = 30;
     public int limitePuntosVictoria = 500; // Puntos para ganar
@@ -32,6 +40,9 @@ public class GeneradorMensajes : MonoBehaviour
 
     [Header("Efecto de pantalla")]
     public GameObject FlashRojo;
+
+    [Header("Configuración para Ex audio")]
+    public AudioClip error; 
 
     private bool juegoTerminado = false;
     private CameraShaker shaker;
@@ -56,35 +67,50 @@ public class GeneradorMensajes : MonoBehaviour
         {
             velocidadActual += incrementoVelocidad * Time.deltaTime;
         }
+
+        // Reducción del tiempo de espera (Cada vez salen más mensajes)
+        // Hacemos que el tiempo de spawn baje proporcionalmente a la velocidad
+        float progreso = (velocidadActual - velocidadInicial) / (velocidadMaxima - velocidadInicial);
+        tiempoEntreMensajesActual = Mathf.Lerp(tiempoEntreMensajesInicial, tiempoMinimoEntreMensajes, progreso);
     }
 
     IEnumerator SpamMensajes()
     {
         while (!juegoTerminado)
         {
-            yield return new WaitForSeconds(tiempoEntreMensajes);
+            yield return new WaitForSeconds(tiempoEntreMensajesActual);
             
             
-            GameObject prefabAElegir = (Random.value > 0.5f) ? prefabExNew : prefabFamilia;
+            // 50% de probabilidad de que sea Ex o Familia
+            bool esEx = Random.value > 0.5f;
+            GameObject prefabAElegir;
             
+            if (esEx)
+            {
+                // Elige uno al azar de la lista del Ex
+                prefabAElegir = prefabsEx[Random.Range(0, prefabsEx.Length)];
+            }
+            else
+            {
+                // Elige uno al azar de la lista de Familia (Madre o Padre)
+                prefabAElegir = prefabsFamilia[Random.Range(0, prefabsFamilia.Length)];
+            }
             
             GameObject nuevoMensaje = Instantiate(prefabAElegir, GameObject.Find("Canvas").transform);
-            
-          
             nuevoMensaje.GetComponent<RectTransform>().anchoredPosition = puntoDeSpawn.GetComponent<RectTransform>().anchoredPosition;
             
-           
-            if (prefabAElegir == prefabExNew)
+            // Si el elegido pertenece a la lista de Ex, le ponemos el tag rojo
+            if (esEx)
             {
                 nuevoMensaje.tag = "MensajeRojo";
             }
             
-            // Conectamos este generador con el script de swipear del mensaje
             Swipear scriptSwipe = nuevoMensaje.GetComponent<Swipear>();
             if (scriptSwipe != null)
             {
                 scriptSwipe.generadorPrincipal = this;
             }
+    
         }
     }
 
@@ -118,6 +144,11 @@ public class GeneradorMensajes : MonoBehaviour
         if(FlashRojo != null)
         {
             StartCoroutine(EfectoPantallaRoja());
+        }
+
+        if (error != null)
+        {
+            AudioSource.PlayClipAtPoint(error, Camera.main.transform.position);
         }
 
         //A TEMBLAR

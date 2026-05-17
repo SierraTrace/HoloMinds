@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911870b8dad7943d5ad757fa851a942d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Temporizador
-  tiempoRestante: 30
+  tiempoRestante: 20
   textoCronometro: {fileID: 1172110472}
 --- !u!114 &1172110472
 MonoBehaviour:
@@ -1375,21 +1375,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   minigameEndScript: {fileID: 1653524705}
-  prefabExNew: {fileID: 2929264850485597898, guid: 0b185c903980a4089bdbdb07d0dd4684, type: 3}
-  prefabFamilia: {fileID: 2929264850485597898, guid: eadc744e9b2ef4c14bc7eff11348847c, type: 3}
+  prefabsEx:
+  - {fileID: 2929264850485597898, guid: 0b185c903980a4089bdbdb07d0dd4684, type: 3}
+  prefabsFamilia:
+  - {fileID: 2929264850485597898, guid: eadc744e9b2ef4c14bc7eff11348847c, type: 3}
+  - {fileID: 2929264850485597898, guid: 332ffc47d4e1f4b988f2e1333a8b6acd, type: 3}
+  - {fileID: 2929264850485597898, guid: 1b7fc4b4167d34301868ba23f5b3dcb7, type: 3}
   puntoDeSpawn: {fileID: 915279518}
-  tiempoEntreMensajes: 1
+  tiempoEntreMensajesInicial: 0.6
+  tiempoMinimoEntreMensajes: 0.4
   puntuacionActual: 30
-  limitePuntosVictoria: 100
+  limitePuntosVictoria: 500
   mensajesRojosEscapados: 0
-  limiteErrores: 5
+  limiteErrores: 20
   indiceDelMinijuego: 2
   objetoBotonFinalizar: {fileID: 326293642}
-  velocidadInicial: 2
+  velocidadInicial: 4
   velocidadActual: 0
-  incrementoVelocidad: 0.1
-  velocidadMaxima: 10
+  incrementoVelocidad: 0.2
+  velocidadMaxima: 50
   FlashRojo: {fileID: 1260405031}
+  error: {fileID: 8300000, guid: a68439bf7ec524af5ac7dbe49c4fdf30, type: 3}
 --- !u!1 &1260405031
 GameObject:
   m_ObjectHideFlags: 0

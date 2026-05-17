@@ -3,7 +3,7 @@ using TMPro; // Para el texto
 
 public class Temporizador : MonoBehaviour
 {
-    public float tiempoRestante = 30f; // Los segundos que tú quieras
+    public float tiempoRestante = 20f; // Los segundos que tú quieras
     public TextMeshProUGUI textoCronometro;
     private bool cuentaActiva = true;
 
