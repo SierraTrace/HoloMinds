@@ -13,6 +13,14 @@ public class FinalScoreUI : MonoBehaviour
     public float delayBetweenScores = 0.8f;
     public float scoreCountSpeed = 100f;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip scoreAppearClip;
+    public AudioClip totalCountingClip;
+    public float totalSoundInterval = 0.05f;
+
+    private float _totalSoundTimer = 0f;
+
     void Start()
     {
         scoresListText.text = "";
@@ -20,40 +28,54 @@ public class FinalScoreUI : MonoBehaviour
         mainMenuButton.SetActive(false);
 
         StartCoroutine(ShowScoresSequence());
-
     }
-
 
     private IEnumerator ShowScoresSequence()
     {
         int[] scores = GameManager.Instance.gameScores;
 
-        for(int i = 0; i < scores.Length; i++)
+        // Mostrar puntuaciones individuales
+        for (int i = 0; i < scores.Length; i++)
         {
             yield return new WaitForSeconds(delayBetweenScores);
 
             scoresListText.text += $"Juego {i + 1}: {scores[i]}\n";
 
-            // TODO: Llamada a sonido de puntuación aquí
+            
+            if (audioSource != null && scoreAppearClip != null)
+                audioSource.PlayOneShot(scoreAppearClip);
         }
 
         yield return new WaitForSeconds(1f);
 
+        // Conteo animado del total
         float currentDisplayScore = 0;
-        while (currentDisplayScore < GameManager.Instance.totalScore)
+        int finalScore = GameManager.Instance.totalScore;
+
+        while (currentDisplayScore < finalScore)
         {
             currentDisplayScore += Time.deltaTime * scoreCountSpeed;
             totalScoreText.text = "TOTAL: " + Mathf.Round(currentDisplayScore);
+
+            
+            _totalSoundTimer += Time.deltaTime;
+            if (_totalSoundTimer >= totalSoundInterval)
+            {
+                if (audioSource != null && totalCountingClip != null)
+                    audioSource.PlayOneShot(totalCountingClip);
+
+                _totalSoundTimer = 0f;
+            }
+
             yield return null;
         }
 
-        // totalScoreText.text = "Puntuación Total: " + GameManager.Instance.totalScore;
+        totalScoreText.text = "TOTAL: " + finalScore;
 
         yield return new WaitForSeconds(0.5f);
 
         mainMenuButton.SetActive(true);
     }
-
 
     public void BackToMainMenu()
     {
